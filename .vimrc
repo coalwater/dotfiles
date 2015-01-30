@@ -65,6 +65,7 @@ set laststatus=2                                      " show status line
 set ruler
 set showmatch                                         " show matching bracket
 set nohlsearch                                        " remove highligting after search complete
+set list listchars=tab:»·,trail:·,nbsp:·              " Display trailing whitespace and tabs
 syntax on                                             " syntax highlighting
 
 " tabs and spaces
