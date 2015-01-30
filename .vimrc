@@ -96,6 +96,12 @@ vnoremap <silent> k gk
 " space + w closes buffer
 nnoremap <leader>w :bw<CR>
 
+" Silly typos that i hate
+command WQ wq
+command Wq wq
+command W w
+command Q q
+
 " Git gutter goodies
 nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>  " Leader + Right shows hunk
 nnoremap <A-Down> :GitGutterNextHunk<CR>            " Alt + Down shows next hunk
