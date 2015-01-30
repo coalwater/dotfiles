@@ -81,6 +81,11 @@ vnoremap <silent> k gk
 
 " space + w closes buffer
 nnoremap <leader>w :bw<CR>
+
+" alt + direction for buffer swapping
+nnoremap <A-left> :bp<cr>
+nnoremap <A-right> :bn<cr>
+
 " space + q closes all
 nnoremap <leader>q :qa<CR>
 
