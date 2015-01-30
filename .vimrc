@@ -21,6 +21,7 @@ Plugin 'airblade/vim-gitgutter'                       " Git gutter
 Plugin 'tpope/vim-surround'                           " Useful surround functions
 Plugin 'tpope/vim-endwise'                            " Adding 'end' in ruby
 Plugin 'vim-scripts/molokai'                          " Molokai color theme
+Plugin 'majutsushi/tagbar'                            " Tag list
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 call vundle#end()                                     " required
 
@@ -41,6 +42,9 @@ let g:airline#extensions#tabline#enabled = 1          " shows tabs
 "Molokai colorscheme
 let g:molokai_original = 1
 colorscheme molokai                                   " The color scheme
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
 
 " syntastic
 set statusline+=%#warningmsg#
