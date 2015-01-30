@@ -83,6 +83,11 @@ vnoremap <silent> k gk
 " space + w closes buffer
 nnoremap <leader>w :bw<CR>
 
+" Git gutter goodies
+nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>  " Leader + Right shows hunk
+nnoremap <A-Down> :GitGutterNextHunk<CR>            " Alt + Down shows next hunk
+nnoremap <A-Up> :GitGutterPrevHunk<CR>              " Alt + Up shows previous hunk
+
 " alt + direction for buffer swapping
 nnoremap <A-left> :bp<cr>
 nnoremap <A-right> :bn<cr>
