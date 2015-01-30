@@ -81,6 +81,8 @@ nnoremap <silent> k gk
 vnoremap <silent> j gj
 vnoremap <silent> k gk
 
+nnoremap <C-F> :NERDTreeFind<CR>                    " Ctrl+1 triggers NERDTreeFind
+
 " space + w closes buffer
 nnoremap <leader>w :bw<CR>
 
