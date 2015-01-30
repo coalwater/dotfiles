@@ -20,6 +20,7 @@ Plugin 'scrooloose/syntastic'                         " syntax
 Plugin 'airblade/vim-gitgutter'                       " Git gutter
 Plugin 'tpope/vim-surround'                           " Useful surround functions
 Plugin 'tpope/vim-endwise'                            " Adding 'end' in ruby
+Plugin 'tpope/vim-obsession'                          " Vim session saving
 Plugin 'vim-scripts/molokai'                          " Molokai color theme
 Plugin 'majutsushi/tagbar'                            " Tag list
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
