@@ -48,10 +48,10 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
 
 " my settings "
-set backspace=2   			                              " Backspace deletes like most programs in insert mode
+set backspace=2                                       " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
-set showcmd       			                              " display incomplete commands
+set showcmd                                           " display incomplete commands
 set incsearch                                         " do incremental searching
 set ignorecase
 set smartcase
