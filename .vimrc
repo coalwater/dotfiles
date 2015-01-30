@@ -20,6 +20,7 @@ Plugin 'scrooloose/syntastic'                         " syntax
 Plugin 'airblade/vim-gitgutter'                       " Git gutter
 Plugin 'tpope/vim-surround'                           " Useful surround functions
 Plugin 'tpope/vim-endwise'                            " Adding 'end' in ruby
+Plugin 'vim-scripts/molokai'                          " Molokai color theme
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 call vundle#end()                                     " required
 
@@ -36,6 +37,10 @@ endif
 let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#enabled = 1          " shows tabs
 
+
+"Molokai colorscheme
+let g:molokai_original = 1
+colorscheme molokai                                   " The color scheme
 
 " syntastic
 set statusline+=%#warningmsg#
@@ -60,7 +65,6 @@ set autowrite                                         " Automatically :write bef
 set timeoutlen=500
 set t_Co=256
 set nu                                                " show line numbers
-colorscheme desert                                    " The color scheme
 set noeb vb                                           " Disable annoying bells
 set laststatus=2                                      " show status line
 set ruler
