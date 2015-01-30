@@ -19,6 +19,7 @@ Plugin 'tpope/vim-fugitive'                           " Git commands
 Plugin 'scrooloose/syntastic'                         " syntax
 Plugin 'airblade/vim-gitgutter'                       " Git gutter
 Plugin 'tpope/vim-surround'                           " Useful surround functions
+Plugin 'tpope/vim-endwise'                            " Adding 'end' in ruby
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 call vundle#end()                                     " required
 
