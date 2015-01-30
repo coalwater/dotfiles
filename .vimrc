@@ -57,6 +57,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
 
+" NERDTree customizations
+let NERDTreeQuitOnOpen = 1
+nnoremap <C-F> :NERDTreeFind<CR>                      " Ctrl+F triggers NERDTreeFind
+
 " my settings "
 set backspace=2                                       " Backspace deletes like most programs in insert mode
 set nobackup
@@ -88,8 +92,6 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 vnoremap <silent> j gj
 vnoremap <silent> k gk
-
-nnoremap <C-F> :NERDTreeFind<CR>                    " Ctrl+1 triggers NERDTreeFind
 
 " space + w closes buffer
 nnoremap <leader>w :bw<CR>
