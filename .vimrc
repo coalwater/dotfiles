@@ -103,6 +103,9 @@ command Wq wq
 command W w
 command Q q
 
+" User ctrl+space to trigger autocomplete
+inoremap <Tab> <c-n>
+
 " Git gutter goodies
 nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>  " Leader + Right shows hunk
 nnoremap <A-Down> :GitGutterNextHunk<CR>            " Alt + Down shows next hunk
