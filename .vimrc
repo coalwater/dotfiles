@@ -29,6 +29,11 @@ call vundle#end()                                     " required
 
 filetype plugin indent on                             " required
 
+
+" " Obsession
+" Load previsou session
+nmap <F5> :source Session.vim<CR>
+
 " " airline
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
