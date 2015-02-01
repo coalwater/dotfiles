@@ -24,6 +24,7 @@ Plugin 'tpope/vim-endwise'                            " Adding 'end' in ruby
 Plugin 'tpope/vim-obsession'                          " Vim session saving
 Plugin 'vim-scripts/molokai'                          " Molokai color theme
 Plugin 'majutsushi/tagbar'                            " Tag list
+Plugin 'Valloric/YouCompleteMe'                       " Facny auto complete
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 call vundle#end()                                     " required
 
@@ -117,9 +118,6 @@ command WQ wq
 command Wq wq
 command W w
 command Q q
-
-" User ctrl+space to trigger autocomplete
-inoremap <Tab> <c-n>
 
 " Git gutter goodies
 nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>  " Leader + Right shows hunk
