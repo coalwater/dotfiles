@@ -46,7 +46,8 @@ let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#enabled = 1          " shows tabs
 
 
-"Molokai colorscheme
+" " color schemes
+" Molokai colorscheme
 let g:molokai_original = 1
 colorscheme molokai                                   " The color scheme
 
