@@ -12,6 +12,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'nginx.vim'                                    " no idea yet
 Plugin 'terryma/vim-multiple-cursors'                 " multiple cursor functionality, like sublime
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'                              " rails navigation and functions
 Plugin 'scrooloose/nerdtree'                          " a file tree
 Plugin 'bling/vim-airline'                            " the nice status line below
