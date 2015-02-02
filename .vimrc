@@ -23,6 +23,7 @@ Plugin 'tpope/vim-surround'                           " Useful surround function
 Plugin 'tpope/vim-endwise'                            " Adding 'end' in ruby
 Plugin 'tpope/vim-obsession'                          " Vim session saving
 Plugin 'vim-scripts/molokai'                          " Molokai color theme
+Plugin 'Lokaltog/vim-easymotion'                      " Use easy motion for search
 Plugin 'majutsushi/tagbar'                            " Tag list
 Plugin 'Valloric/YouCompleteMe'                       " Facny auto complete
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
@@ -127,6 +128,9 @@ nnoremap <A-Up> :GitGutterPrevHunk<CR>              " Alt + Up shows previous hu
 " alt + direction for buffer swapping
 nnoremap <A-left> :bp<cr>
 nnoremap <A-right> :bn<cr>
+
+" Easy motion search to replace the default
+map / <Plug>(easymotion-sn)
 
 " space + q closes all
 nnoremap <leader>q :qa<CR>
