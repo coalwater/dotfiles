@@ -136,7 +136,5 @@ map / <Plug>(easymotion-sn)
 nnoremap <leader>q :qa<CR>
 
 " NERDTree
-" close vim when only NERDTree is remaining
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Toggle NERDTree with F2
 silent! nnoremap <F2> :NERDTreeToggle<CR>
