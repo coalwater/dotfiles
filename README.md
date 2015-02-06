@@ -11,10 +11,9 @@
 
 ## Steps
 
-1- Check the [vundle installation instructions][vundle-installation]
+1- Check the [vundle installation instructions][vundle-installation]  
 2- Place the .vimrc in your home, and open vim, then you could run `:PluginInstall` this way vundle will scan your
-file for the defined bundles and install the missing bundles ( or all of them if none are installed )
-
+file for the defined bundles and install the missing bundles ( or all of them if none are installed )  
 
 [vundle]:https://github.com/gmarik/Vundle.vim
 [vundle-installation]: https://github.com/gmarik/Vundle.vim#quick-start
