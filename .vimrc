@@ -25,7 +25,7 @@ Plugin 'tpope/vim-obsession'                          " Vim session saving
 Plugin 'vim-scripts/molokai'                          " Molokai color theme
 Plugin 'Lokaltog/vim-easymotion'                      " Use easy motion for search
 Plugin 'majutsushi/tagbar'                            " Tag list
-Plugin 'Valloric/YouCompleteMe'                       " Facny auto complete
+Plugin 'Valloric/YouCompleteMe'                       " Fancy auto complete
 Plugin 'sjl/gundo.vim'                                " History keeping
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 call vundle#end()                                     " required
