@@ -26,6 +26,7 @@ Plugin 'vim-scripts/molokai'                          " Molokai color theme
 Plugin 'Lokaltog/vim-easymotion'                      " Use easy motion for search
 Plugin 'majutsushi/tagbar'                            " Tag list
 Plugin 'Valloric/YouCompleteMe'                       " Facny auto complete
+Plugin 'sjl/gundo.vim'                                " History keeping
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 call vundle#end()                                     " required
 
@@ -137,6 +138,13 @@ map / <Plug>(easymotion-sn)
 
 " space + q closes all
 nnoremap <leader>q :qa<CR>
+
+" Gundo shortcut
+nnoremap <F4> :GundoToggle<CR>
+let g:gundo_preview_bottom = 1
+let g:gundo_close_on_revert = 1
+let g:gundo_width = 30
+let g:gundo_preview_height = 40
 
 " NERDTree
 " Toggle NERDTree with F2
