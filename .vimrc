@@ -36,6 +36,9 @@ filetype plugin indent on                             " required
 " Load previsou session
 nmap <F5> :source Session.vim<CR>
 
+" " suspend by f12
+nnoremap <F12> :suspend<CR>
+
 " " airline
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
