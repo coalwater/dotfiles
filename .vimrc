@@ -149,3 +149,9 @@ let g:gundo_preview_height = 40
 " NERDTree
 " Toggle NERDTree with F2
 silent! nnoremap <F2> :NERDTreeToggle<CR>
+
+" " Gvim options
+set guioptions-=m                                  "remove menu bar
+set guioptions-=T                                  "remove toolbar
+set guioptions-=r                                  "remove right-hand scroll bar
+set guioptions-=L                                  "remove left-hand scroll bar
