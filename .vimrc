@@ -130,8 +130,8 @@ nnoremap <A-Down> :GitGutterNextHunk<CR>            " Alt + Down shows next hunk
 nnoremap <A-Up> :GitGutterPrevHunk<CR>              " Alt + Up shows previous hunk
 
 " alt + direction for buffer swapping
-nnoremap <A-left> :bp<cr>
-nnoremap <A-right> :bn<cr>
+nnoremap <C-PageUp> :bp<cr>
+nnoremap <C-PageDown> :bn<cr>
 
 " Easy motion search to replace the default
 map / <Plug>(easymotion-sn)
