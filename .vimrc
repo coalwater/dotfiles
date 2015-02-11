@@ -86,8 +86,6 @@ nnoremap <C-F> :NERDTreeFind<CR>                      " Ctrl+F triggers NERDTree
 
 " my settings "
 set backspace=2                                       " Backspace deletes like most programs in insert mode
-set nobackup
-set nowritebackup
 set showcmd                                           " display incomplete commands
 set incsearch                                         " do incremental searching
 set ignorecase
@@ -159,6 +157,11 @@ set guioptions-=r                                  "remove right-hand scroll bar
 set guioptions-=L                                  "remove left-hand scroll bar
 
 au FocusLost * silent! wa                          "auto save when loosing focus
+
+set undofile                                       "  Save undo's after file closes
+set undodir=$HOME/.vim/undo                        "  where to save undo histories
+set undolevels=1000                                "  How many undos
+set undoreload=10000                               "  number of lines to save for undo
 
 " Rspec settings
 map <Leader><Leader>c :call RunCurrentSpecFile()<CR>
