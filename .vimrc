@@ -27,6 +27,7 @@ Plugin 'Lokaltog/vim-easymotion'                      " Use easy motion for sear
 Plugin 'majutsushi/tagbar'                            " Tag list
 Plugin 'Valloric/YouCompleteMe'                       " Fancy auto complete
 Plugin 'sjl/gundo.vim'                                " History keeping
+Plugin 'thoughtbot/vim-rspec'                         " easy rspec testing
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 call vundle#end()                                     " required
 
@@ -158,3 +159,9 @@ set guioptions-=r                                  "remove right-hand scroll bar
 set guioptions-=L                                  "remove left-hand scroll bar
 
 au FocusLost * silent! wa                          "auto save when loosing focus
+
+" Rspec settings
+map <Leader><Leader>c :call RunCurrentSpecFile()<CR>
+map <Leader><Leader>s :call RunNearestSpec()<CR>
+map <Leader><Leader>l :call RunLastSpec()<CR>
+map <Leader><Leader>a :call RunAllSpecs()<CR>
