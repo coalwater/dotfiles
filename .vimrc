@@ -28,6 +28,7 @@ Plugin 'majutsushi/tagbar'                            " Tag list
 Plugin 'Valloric/YouCompleteMe'                       " Fancy auto complete
 Plugin 'sjl/gundo.vim'                                " History keeping
 Plugin 'thoughtbot/vim-rspec'                         " easy rspec testing
+Plugin 'nathanaelkane/vim-indent-guides'              " Show indentations easily
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 call vundle#end()                                     " required
 
@@ -169,3 +170,10 @@ map <Leader><Leader>c :call RunCurrentSpecFile()<CR>
 map <Leader><Leader>s :call RunNearestSpec()<CR>
 map <Leader><Leader>l :call RunLastSpec()<CR>
 map <Leader><Leader>a :call RunAllSpecs()<CR>
+
+" highlighting indentation settings
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_enable_on_vim_startup = 1
+hi IndentGuidesOdd  ctermbg=darkgrey
+hi IndentGuidesEven ctermbg=darkgrey
