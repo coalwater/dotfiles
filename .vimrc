@@ -28,6 +28,7 @@ Plugin 'majutsushi/tagbar'                            " Tag list
 Plugin 'Valloric/YouCompleteMe'                       " Fancy auto complete
 Plugin 'sjl/gundo.vim'                                " History keeping
 Plugin 'thoughtbot/vim-rspec'                         " easy rspec testing
+Plugin 'editorconfig/editorconfig-vim'                " support for .editorconfig files
 Plugin 'nathanaelkane/vim-indent-guides'              " Show indentations easily
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 call vundle#end()                                     " required
