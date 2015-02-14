@@ -178,3 +178,7 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_enable_on_vim_startup = 1
 hi IndentGuidesOdd  ctermbg=darkgrey
 hi IndentGuidesEven ctermbg=darkgrey
+
+" Indentation doesn't exit visual mode
+vnoremap < <gv
+vnoremap > >gv
