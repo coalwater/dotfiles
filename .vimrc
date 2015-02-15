@@ -158,13 +158,14 @@ let g:gundo_preview_height = 40
 " Toggle NERDTree with F2
 silent! nnoremap <F2> :NERDTreeToggle<CR>
 
-" " Gvim options
-set guioptions-=m                                  "remove menu bar
-set guioptions-=T                                  "remove toolbar
-set guioptions-=r                                  "remove right-hand scroll bar
-set guioptions-=L                                  "remove left-hand scroll bar
 
-au FocusLost * silent! wa                          "auto save when loosing focus
+" " Gvim options
+set guioptions-=m                                  " remove menu bar
+set guioptions-=T                                  " remove toolbar
+set guioptions-=r                                  " remove right-hand scroll bar
+set guioptions-=L                                  " remove left-hand scroll bar
+let &guifont='Fantasque Sans Mono 15'
+au FocusLost * silent! wa                          " auto save when loosing focus
 
 set undofile                                       "  Save undo's after file closes
 set undodir=$HOME/.vim/undo                        "  where to save undo histories
