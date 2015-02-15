@@ -82,6 +82,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
 
+" rails.vim settings
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_rails = 1
+
 " NERDTree customizations
 let NERDTreeQuitOnOpen = 1
 nnoremap <C-F> :NERDTreeFind<CR>                      " Ctrl+F triggers NERDTreeFind
