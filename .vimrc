@@ -165,7 +165,7 @@ set guioptions-=m                                  " remove menu bar
 set guioptions-=T                                  " remove toolbar
 set guioptions-=r                                  " remove right-hand scroll bar
 set guioptions-=L                                  " remove left-hand scroll bar
-let &guifont='Fantasque Sans Mono 15'
+let &guifont='Fantasque Sans Mono 13'
 au FocusLost * silent! wa                          " auto save when loosing focus
 
 set undofile                                       "  Save undo's after file closes
