@@ -196,3 +196,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guifg=#3C3D38 guib
 " Indentation doesn't exit visual mode
 vnoremap < <gv
 vnoremap > >gv
+
+" vimrspec configuration
+let g:rspec_command = "!bundle exec rspec {spec}"
