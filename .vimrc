@@ -32,6 +32,8 @@ Plugin 'editorconfig/editorconfig-vim'                " support for .editorconfi
 Plugin 'nathanaelkane/vim-indent-guides'              " Show indentations easily
 Plugin 'scrooloose/nerdcommenter'                     " commenting lines
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
+Plugin 'elentok/plaintasks.vim'                       " Plain tasks
+Plugin 'tpope/vim-dispatch'                           " Run asynchronus commands
 call vundle#end()                                     " required
 
 filetype plugin indent on                             " required
