@@ -34,6 +34,7 @@ Plugin 'scrooloose/nerdcommenter'                     " commenting lines
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 Plugin 'elentok/plaintasks.vim'                       " Plain tasks
 Plugin 'tpope/vim-dispatch'                           " Run asynchronus commands
+Plugin 'rainerborene/vim-reek'                        " code smell detection
 call vundle#end()                                     " required
 
 filetype plugin indent on                             " required
