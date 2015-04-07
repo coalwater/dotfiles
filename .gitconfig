@@ -1,0 +1,15 @@
+[user]
+	name = Mohammad AbuShady
+	email = coalwater5@gmail.com
+[merge]
+	tool = meld
+[diff]
+	tool = meld
+[core]
+	excludesfile = /home/mohammad/.gitignore
+[push]
+	default = simple
+[rerere]
+	enabled = false
+[github]
+	user = coalwater
