@@ -34,6 +34,8 @@ Plugin 'scrooloose/nerdcommenter'                     " commenting lines
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 Plugin 'elentok/plaintasks.vim'                       " Plain tasks
 Plugin 'rainerborene/vim-reek'                        " code smell detection
+Plugin 'christoomey/vim-tmux-navigator'               " testing tmux plugin
+Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 call vundle#end()                                     " required
 
 filetype plugin indent on                             " required
