@@ -33,7 +33,6 @@ Plugin 'nathanaelkane/vim-indent-guides'              " Show indentations easily
 Plugin 'scrooloose/nerdcommenter'                     " commenting lines
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 Plugin 'elentok/plaintasks.vim'                       " Plain tasks
-Plugin 'christoomey/vim-tmux-navigator'               " testing tmux plugin
 Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 Plugin 'ap/vim-css-color'                             " display colors in vim
 call vundle#end()                                     " required
