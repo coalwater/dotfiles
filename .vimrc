@@ -62,7 +62,7 @@ let g:airline#extensions#tabline#enabled = 1          " shows tabs
 " " CtrlP Settings
 " ctrlp exclude
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.(git|hg|svn)$',
+  \ 'dir':  '\.(git|hg|svn|orig)$|\vtmp|\vdoc|\vcoverage',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': '',
   \ }
