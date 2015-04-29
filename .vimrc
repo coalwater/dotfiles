@@ -62,7 +62,7 @@ let g:airline#extensions#tabline#enabled = 1          " shows tabs
 " " CtrlP Settings
 " ctrlp exclude
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.(git|hg|svn|orig)$|\vtmp|\vdoc|\vcoverage',
+  \ 'dir':  '\v\.(git|hg|svn|orig)$|\vtmp|\vdoc|\vcoverage|\vtags',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': '',
   \ }
@@ -71,10 +71,11 @@ if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = {
-    'fallback': 'ag %s -l --nocolor -g ""',
-    'ignore': 1
-    }
+  "let g:ctrlp_user_command = {
+  "  'fallback': 'ag %s -l --nocolor -g ""',
+  "  'ignore': 1
+  "  }
+
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
