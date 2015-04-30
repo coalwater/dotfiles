@@ -35,6 +35,7 @@ Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 Plugin 'elentok/plaintasks.vim'                       " Plain tasks
 Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 Plugin 'ap/vim-css-color'                             " display colors in vim
+Plugin 'romainl/Apprentice'                           " Apprentice color scheme
 call vundle#end()                                     " required
 
 filetype plugin indent on                             " required
@@ -83,8 +84,7 @@ endif
 
 " " color schemes
 " Molokai colorscheme
-let g:molokai_original = 1
-colorscheme molokai                                   " The color scheme
+colorscheme apprentice                                " The color scheme
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
