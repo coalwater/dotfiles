@@ -39,6 +39,8 @@ Plugin 'romainl/Apprentice'                           " Apprentice color scheme
 Plugin 'SirVer/ultisnips'                             " snippets engine
 Plugin 'honza/vim-snippets'                           " huge snippets bundle
 Plugin 'StanAngeloff/php.vim'                         " php ctags
+Plugin 'szw/vim-tags'                                 " ctags
+Plugin 'craigemery/vim-autotag'                       " ctags generation
 
 call vundle#end()                                     " required
 
