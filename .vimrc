@@ -38,6 +38,7 @@ Plugin 'ap/vim-css-color'                             " display colors in vim
 Plugin 'romainl/Apprentice'                           " Apprentice color scheme
 Plugin 'SirVer/ultisnips'                             " snippets engine
 Plugin 'honza/vim-snippets'                           " huge snippets bundle
+Plugin 'StanAngeloff/php.vim'                         " php ctags
 
 call vundle#end()                                     " required
 
