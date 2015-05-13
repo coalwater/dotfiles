@@ -65,6 +65,9 @@ endif
 let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#enabled = 1          " shows tabs
 
+" backup path
+set backupdir=~/.vim/backups
+
 
 " " CtrlP Settings
 " ctrlp exclude
