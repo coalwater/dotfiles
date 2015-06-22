@@ -87,7 +87,8 @@ if executable('ag')
   "  }
 
   " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  let g:ctrlp_use_caching = 1
+  let g:ctrlp_cmd = 'CtrlPMixed'
 endif
 
 
@@ -228,3 +229,5 @@ map <C-l> <C-W>l
 
 " create file if not exist
 map <leader>gf :e <cfile><cr>
+
+map <C-m> :CtrlPBufTagAll<CR>                      " list all tags in all open files
