@@ -84,9 +84,7 @@ if executable('ag')
   "  'ignore': 1
   "  }
 
-  " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 1
-  let g:ctrlp_cmd = 'CtrlPMixed'
 endif
 
 
