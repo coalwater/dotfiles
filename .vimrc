@@ -10,7 +10,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'nginx.vim'                                    " no idea yet
+Plugin 'nginx.vim'                                    " color coding for nginx filetype
 Plugin 'terryma/vim-multiple-cursors'                 " multiple cursor functionality, like sublime
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'                              " rails navigation and functions
@@ -30,9 +30,7 @@ Plugin 'sjl/gundo.vim'                                " History keeping
 Plugin 'thoughtbot/vim-rspec'                         " easy rspec testing
 Plugin 'editorconfig/editorconfig-vim'                " support for .editorconfig files
 Plugin 'nathanaelkane/vim-indent-guides'              " Show indentations easily
-Plugin 'scrooloose/nerdcommenter'                     " commenting lines
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
-Plugin 'elentok/plaintasks.vim'                       " Plain tasks
 Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 Plugin 'ap/vim-css-color'                             " display colors in vim
 Plugin 'romainl/Apprentice'                           " Apprentice color scheme
@@ -40,7 +38,7 @@ Plugin 'SirVer/ultisnips'                             " snippets engine
 Plugin 'honza/vim-snippets'                           " huge snippets bundle
 Plugin 'StanAngeloff/php.vim'                         " php ctags
 Plugin 'szw/vim-tags'                                 " ctags
-Plugin 'craigemery/vim-autotag'                       " ctags generation
+Plugin 'tpope/vim-commentary'                         " comments
 
 call vundle#end()                                     " required
 
