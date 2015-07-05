@@ -101,6 +101,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
+let g:syntastic_ruby_rubocop_args = '-c .rubocop.yml --force-exclusion'
+let g:syntastic_ruby_checkers = ['rubocop']
 
 " rails.vim settings
 let g:rubycomplete_buffer_loading = 1
