@@ -187,7 +187,8 @@ set guioptions-=T                                  " remove toolbar
 set guioptions-=r                                  " remove right-hand scroll bar
 set guioptions-=L                                  " remove left-hand scroll bar
 let &guifont='Fantasque Sans Mono 13'
-au FocusLost * silent! wa                          " auto save when loosing focus
+au FocusLost,WinLeave * silent! wa                " auto save when loosing focus
+au FocusGained,BufEnter * silent! !               " auto reload when buffer enters
 
 set undofile                                       "  Save undo's after file closes
 set undodir=$HOME/.vim/undo                        "  where to save undo histories
@@ -228,4 +229,4 @@ map <C-l> <C-W>l
 " create file if not exist
 map <leader>gf :e <cfile><cr>
 
-map <C-m> :CtrlPBufTagAll<CR>                      " list all tags in all open files
+map <M-p> :CtrlPBufTag<cr>                           " list all tags in current open buffer
