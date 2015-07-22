@@ -84,7 +84,7 @@ if executable('ag')
   "  'ignore': 1
   "  }
 
-  let g:ctrlp_use_caching = 1
+  let g:ctrlp_use_caching = 0
 endif
 
 
