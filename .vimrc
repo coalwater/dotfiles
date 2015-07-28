@@ -49,9 +49,6 @@ filetype plugin indent on                             " required
 " Load previsou session
 nmap <F5> :source Session.vim<CR>
 
-" " suspend by f12
-nnoremap <F12> :suspend<CR>
-
 " " airline
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
@@ -179,16 +176,6 @@ let g:gundo_preview_height = 40
 " NERDTree
 " Toggle NERDTree with F2
 silent! nnoremap <F2> :NERDTreeToggle<CR>
-
-
-" " Gvim options
-set guioptions-=m                                  " remove menu bar
-set guioptions-=T                                  " remove toolbar
-set guioptions-=r                                  " remove right-hand scroll bar
-set guioptions-=L                                  " remove left-hand scroll bar
-let &guifont='Fantasque Sans Mono 13'
-au FocusLost,WinLeave * silent! wa                " auto save when loosing focus
-au FocusGained,BufEnter * silent! !               " auto reload when buffer enters
 
 set undofile                                       "  Save undo's after file closes
 set undodir=$HOME/.vim/undo                        "  where to save undo histories
