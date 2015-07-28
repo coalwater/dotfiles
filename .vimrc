@@ -142,7 +142,11 @@ vnoremap <silent> j gj
 vnoremap <silent> k gk
 
 " space + w closes buffer
-nnoremap <leader>w :bw<CR>
+nnoremap <leader>w :bd<CR>
+" space + q closes all buffers
+nnoremap <leader>q :%bd<CR>
+" space + space + q closes all
+nnoremap <leader><leader>q :qa<CR>
 
 " Silly typos that i hate
 command WQ wq
@@ -163,8 +167,6 @@ nnoremap <F12> :bn<cr>
 " Easy motion search to replace the default
 map / <Plug>(easymotion-sn)
 
-" space + q closes all
-nnoremap <leader>q :qa<CR>
 
 " Gundo shortcut
 nnoremap <F4> :GundoToggle<CR>
