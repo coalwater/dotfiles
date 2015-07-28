@@ -217,3 +217,4 @@ map <C-l> <C-W>l
 map <leader>gf :e <cfile><cr>
 
 map <M-p> :CtrlPBufTag<cr>                           " list all tags in current open buffer
+map <M-o> :CtrlPBuffer<cr>                           " list buffers for select
