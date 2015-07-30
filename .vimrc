@@ -143,7 +143,7 @@ vnoremap <silent> j gj
 vnoremap <silent> k gk
 
 " space + w closes buffer
-nnoremap <leader>w :bd<CR>
+nnoremap <leader>w :lclose<CR>:bd<CR>
 " space + q closes all buffers
 nnoremap <leader>q :%bd<CR>
 " space + space + q closes all
