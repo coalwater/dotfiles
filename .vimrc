@@ -24,21 +24,15 @@ Plugin 'tpope/vim-endwise'                            " Adding 'end' in ruby
 Plugin 'tpope/vim-obsession'                          " Vim session saving
 Plugin 'vim-scripts/molokai'                          " Molokai color theme
 Plugin 'Lokaltog/vim-easymotion'                      " Use easy motion for search
-Plugin 'majutsushi/tagbar'                            " Tag list
 Plugin 'Valloric/YouCompleteMe'                       " Fancy auto complete
 Plugin 'sjl/gundo.vim'                                " History keeping
-Plugin 'thoughtbot/vim-rspec'                         " easy rspec testing
 Plugin 'editorconfig/editorconfig-vim'                " support for .editorconfig files
 Plugin 'nathanaelkane/vim-indent-guides'              " Show indentations easily
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 Plugin 'ap/vim-css-color'                             " display colors in vim
 Plugin 'romainl/Apprentice'                           " Apprentice color scheme
-Plugin 'SirVer/ultisnips'                             " snippets engine
-Plugin 'honza/vim-snippets'                           " huge snippets bundle
 Plugin 'StanAngeloff/php.vim'                         " php ctags
-Plugin 'szw/vim-tags'                                 " ctags
-Plugin 'tpope/vim-commentary'                         " comments
 
 call vundle#end()                                     " required
 
