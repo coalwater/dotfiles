@@ -7,6 +7,7 @@
 	tool = meld
 [core]
 	excludesfile = /home/mohammad/.gitignore
+	editor = nvim
 [push]
 	default = simple
 [rerere]
