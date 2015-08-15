@@ -9,7 +9,7 @@ let mapleader = " "                                   " Use space as Leader
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'nginx.vim'                                    " color coding for nginx filetype
 Plugin 'terryma/vim-multiple-cursors'                 " multiple cursor functionality, like sublime
 Plugin 'vim-ruby/vim-ruby'
