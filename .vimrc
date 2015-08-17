@@ -25,7 +25,7 @@ Plugin 'tpope/vim-obsession'                          " Vim session saving
 Plugin 'vim-scripts/molokai'                          " Molokai color theme
 Plugin 'Lokaltog/vim-easymotion'                      " Use easy motion for search
 Plugin 'Valloric/YouCompleteMe'                       " Fancy auto complete
-Plugin 'sjl/gundo.vim'                                " History keeping
+Plugin 'simnalamburt/vim-mundo'                       " History keeping
 Plugin 'editorconfig/editorconfig-vim'                " support for .editorconfig files
 Plugin 'nathanaelkane/vim-indent-guides'              " Show indentations easily
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
