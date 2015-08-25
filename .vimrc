@@ -153,8 +153,8 @@ command Q q
 
 " Git gutter goodies
 nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>          " Leader + Right shows hunk
-nnoremap <A-Down> :GitGutterNextHunk<CR>                    " Alt + Down shows next hunk
-nnoremap <A-Up> :GitGutterPrevHunk<CR>                      " Alt + Up shows previous hunk
+nnoremap <M-j> :GitGutterNextHunk<CR>                    " Alt + Down shows next hunk
+nnoremap <M-k> :GitGutterPrevHunk<CR>                      " Alt + Up shows previous hunk
 nnoremap <Leader><Leader><Left> :GitGutterRevertHunk<CR>    " Leader + Right shows hunk
 
 " alt + direction for buffer swapping
