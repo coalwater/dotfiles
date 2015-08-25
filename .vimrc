@@ -138,6 +138,8 @@ vnoremap <silent> k gk
 
 " space + w closes buffer
 nnoremap <leader>w :bd<CR>
+" space + w closes location buffer
+nnoremap <leader>l :lclose<CR>
 " space + q closes all buffers
 nnoremap <leader>q :%bd<CR>
 " space + space + q closes all
