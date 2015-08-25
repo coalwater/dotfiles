@@ -94,7 +94,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_ruby_rubocop_args = '-c .rubocop.yml --force-exclusion'
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:syntastic_ruby_checkers = ['mri', 'rubocop', 'flog']
 
 " rails.vim settings
 let g:rubycomplete_buffer_loading = 1
