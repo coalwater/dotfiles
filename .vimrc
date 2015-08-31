@@ -22,7 +22,6 @@ Plugin 'airblade/vim-gitgutter'                       " Git gutter
 Plugin 'tpope/vim-surround'                           " Useful surround functions
 Plugin 'tpope/vim-endwise'                            " Adding 'end' in ruby
 Plugin 'tpope/vim-obsession'                          " Vim session saving
-Plugin 'vim-scripts/molokai'                          " Molokai color theme
 Plugin 'Lokaltog/vim-easymotion'                      " Use easy motion for search
 Plugin 'Valloric/YouCompleteMe'                       " Fancy auto complete
 Plugin 'simnalamburt/vim-mundo'                       " History keeping
@@ -31,8 +30,12 @@ Plugin 'nathanaelkane/vim-indent-guides'              " Show indentations easily
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 Plugin 'ap/vim-css-color'                             " display colors in vim
-Plugin 'romainl/Apprentice'                           " Apprentice color scheme
 Plugin 'StanAngeloff/php.vim'                         " php ctags
+
+" color schemes
+Plugin 'vim-scripts/molokai'
+Plugin 'romainl/Apprentice'
+Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 call vundle#end()                                     " required
 
