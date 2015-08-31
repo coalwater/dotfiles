@@ -84,7 +84,7 @@ endif
 
 " " color schemes
 " Molokai colorscheme
-colorscheme apprentice                                " The color scheme
+colorscheme Tomorrow-Night                                " The color scheme
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
