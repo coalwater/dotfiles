@@ -31,6 +31,7 @@ Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 Plugin 'ap/vim-css-color'                             " display colors in vim
 Plugin 'StanAngeloff/php.vim'                         " php ctags
+Plugin 'troydm/zoomwintab.vim'                        " split windows maximize and minimize
 
 " color schemes
 Plugin 'vim-scripts/molokai'
