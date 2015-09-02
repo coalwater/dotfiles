@@ -1,6 +1,7 @@
 " Use Vim settings, rather then Vi settings. This setting must be as early as
 " possible, as it has side effects.
 set nocompatible
+
 set shell=/bin/bash                                   " To avoid fish
 let mapleader = " "                                   " Use space as Leader
 
@@ -51,6 +52,7 @@ nmap <F5> :source Session.vim<CR>
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 let g:airline_theme = 'dark'
+
 " fix powerlines
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -61,7 +63,6 @@ let g:airline#extensions#tabline#enabled = 1          " shows tabs
 " backup path
 set backupdir=~/.vim/backups
 
-
 " " CtrlP Settings
 " ctrlp exclude
 let g:ctrlp_custom_ignore = {
@@ -69,6 +70,11 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': '',
   \ }
+
+" utility shorcuts for ctrlp
+map <M-p> :CtrlPBufTag<cr>                           " list all tags in current open buffer
+map <M-o> :CtrlPBuffer<cr>                           " list buffers for select
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
@@ -84,11 +90,7 @@ endif
 
 
 " " color schemes
-" Molokai colorscheme
-colorscheme Tomorrow-Night                                " The color scheme
-
-" Tagbar
-nmap <F8> :TagbarToggle<CR>
+colorscheme Tomorrow-Night
 
 " syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -105,7 +107,9 @@ let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_rails = 1
 
 " NERDTree customizations
-let NERDTreeQuitOnOpen = 1
+silent! nnoremap <F2> :NERDTreeToggle<CR>             " Toggle NERDTree with F2
+
+let NERDTreeQuitOnOpen = 1                            " Close nerd tree after opening a file
 nnoremap <C-F> :NERDTreeFind<CR>                      " Ctrl+F triggers NERDTreeFind
 
 " my settings "
@@ -124,7 +128,6 @@ set ruler
 set showmatch                                         " show matching bracket
 set nohlsearch                                        " remove highligting after search complete
 set list listchars=tab:»·,trail:·,nbsp:·              " Display trailing whitespace and tabs
-"set wildmode=longest,list
 syntax on                                             " syntax highlighting
 
 " tabs and spaces
@@ -159,7 +162,7 @@ command Q q
 nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>          " Leader + Right shows hunk
 nnoremap <M-j> :GitGutterNextHunk<CR>                    " Alt + Down shows next hunk
 nnoremap <M-k> :GitGutterPrevHunk<CR>                      " Alt + Up shows previous hunk
-nnoremap <Leader><Leader><Left> :GitGutterRevertHunk<CR>    " Leader + Right shows hunk
+nnoremap <Leader><Leader><Left> :GitGutterRevertHunk<CR>    " Leader + Leader + left reverts hunk
 
 " alt + direction for buffer swapping
 nnoremap <F11> :bp<cr>
@@ -176,20 +179,10 @@ let g:gundo_close_on_revert = 1
 let g:gundo_width = 30
 let g:gundo_preview_height = 40
 
-" NERDTree
-" Toggle NERDTree with F2
-silent! nnoremap <F2> :NERDTreeToggle<CR>
-
 set undofile                                       "  Save undo's after file closes
 set undodir=$HOME/.vim/undo                        "  where to save undo histories
 set undolevels=1000                                "  How many undos
 set undoreload=10000                               "  number of lines to save for undo
-
-" Rspec settings
-map <Leader><Leader>c :call RunCurrentSpecFile()<CR>
-map <Leader><Leader>s :call RunNearestSpec()<CR>
-map <Leader><Leader>l :call RunLastSpec()<CR>
-map <Leader><Leader>a :call RunAllSpecs()<CR>
 
 " highlighting indentation settings
 let g:indent_guides_guide_size = 1
@@ -203,14 +196,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guifg=#3C3D38 guib
 vnoremap < <gv
 vnoremap > >gv
 
-" vimrspec configuration
-let g:rspec_command = "!bundle exec rspec {spec}"
-
-" snippets setttings, used c-j to avoid YCM conflicting
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -219,5 +204,4 @@ map <C-l> <C-W>l
 " create file if not exist
 map <leader>gf :e <cfile><cr>
 
-map <M-p> :CtrlPBufTag<cr>                           " list all tags in current open buffer
-map <M-o> :CtrlPBuffer<cr>                           " list buffers for select
+map <C-s> :w<cr>                                " ctrl + s for saving
