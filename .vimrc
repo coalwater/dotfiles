@@ -93,10 +93,8 @@ endif
 colorscheme Tomorrow-Night
 
 " syntastic
+let g:syntastic_mode_map = { "mode": "passive" }
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_ruby_rubocop_args = '-c .rubocop.yml --force-exclusion'
@@ -205,3 +203,4 @@ map <C-l> <C-W>l
 map <leader>gf :e <cfile><cr>
 
 map <C-s> :w<cr>                                " ctrl + s for saving
+map <M-q> :SyntasticCheck<cr>                   " Run the syntastic checks
