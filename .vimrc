@@ -100,11 +100,16 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_ruby_rubocop_args = '-c .rubocop.yml --force-exclusion'
+:
+let g:syntastic_ruby_exec = 'ruby'
 let g:syntastic_ruby_checkers = ['mri', 'rubocop', 'flog']
 
 " rails.vim settings
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_rails = 1
+
+" ruby.vim settings
+let ruby_spellcheck_strings = 1
 
 " NERDTree customizations
 silent! nnoremap <F2> :NERDTreeToggle<CR>             " Toggle NERDTree with F2
