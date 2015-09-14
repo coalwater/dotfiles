@@ -33,6 +33,8 @@ Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 Plugin 'ap/vim-css-color'                             " display colors in vim
 Plugin 'StanAngeloff/php.vim'                         " php ctags
 Plugin 'troydm/zoomwintab.vim'                        " split windows maximize and minimize
+Plugin 'christoomey/vim-tmux-navigator'               " tmux navigator
+
 
 " color schemes
 Plugin 'vim-scripts/molokai'
@@ -189,6 +191,10 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=0 guifg=#4F504B guibg=#3C3D38
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guifg=#3C3D38 guibg=#4F504B
+
+
+" tmux navigator settings
+let g:tmux_navigator_save_on_switch = 1
 
 " Indentation doesn't exit visual mode
 vnoremap < <gv
