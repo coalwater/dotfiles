@@ -214,4 +214,4 @@ map <C-l> <C-W>l
 map <leader>gf :e <cfile><cr>
 
 map <C-s> :w<cr>                                " ctrl + s for saving
-map <M-q> :SyntasticCheck<cr>                   " Run the syntastic checks
+map <M-q> :SyntasticToggleMode<cr>              " Run the syntastic checks
