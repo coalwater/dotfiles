@@ -1,6 +1,8 @@
 " Use Vim settings, rather then Vi settings. This setting must be as early as
 " possible, as it has side effects.
 set nocompatible
+set background=dark
+
 
 set shell=/bin/bash                                   " To avoid fish
 let mapleader = " "                                   " Use space as Leader
@@ -35,11 +37,11 @@ Plugin 'StanAngeloff/php.vim'                         " php ctags
 Plugin 'troydm/zoomwintab.vim'                        " split windows maximize and minimize
 Plugin 'christoomey/vim-tmux-navigator'               " tmux navigator
 
-
 " color schemes
 Plugin 'vim-scripts/molokai'
 Plugin 'romainl/Apprentice'
 Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()                                     " required
 
@@ -90,9 +92,6 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-
-" " color schemes
-colorscheme Tomorrow-Night
 
 " syntastic
 let g:syntastic_mode_map = { "mode": "passive" }
@@ -215,3 +214,8 @@ map <leader>gf :e <cfile><cr>
 
 map <C-s> :w<cr>                                " ctrl + s for saving
 map <M-q> :SyntasticToggleMode<cr>              " Run the syntastic checks
+
+" color schemes
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_italic=1
+colorscheme gruvbox
