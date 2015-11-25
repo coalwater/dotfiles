@@ -36,6 +36,7 @@ Plugin 'ap/vim-css-color'                             " display colors in vim
 Plugin 'StanAngeloff/php.vim'                         " php ctags
 Plugin 'troydm/zoomwintab.vim'                        " split windows maximize and minimize
 Plugin 'christoomey/vim-tmux-navigator'               " tmux navigator
+Plugin 'wesQ3/vim-windowswap'                         " moving splits
 
 " color schemes
 Plugin 'vim-scripts/molokai'
