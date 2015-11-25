@@ -37,6 +37,7 @@ Plugin 'StanAngeloff/php.vim'                         " php ctags
 Plugin 'troydm/zoomwintab.vim'                        " split windows maximize and minimize
 Plugin 'christoomey/vim-tmux-navigator'               " tmux navigator
 Plugin 'wesQ3/vim-windowswap'                         " moving splits
+Plugin 'kien/rainbow_parentheses.vim'
 
 " color schemes
 Plugin 'vim-scripts/molokai'
@@ -210,6 +211,29 @@ map <leader>gf :e <cfile><cr>
 
 map <C-s> :w<cr>                                " ctrl + s for saving
 map <M-q> :SyntasticToggleMode<cr>              " Run the syntastic checks
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DastrkOrchid3'],
+    \ ]
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+let g:rbpt_max = 16
 
 " color schemes
 let g:gruvbox_contrast_dark = 'hard'
