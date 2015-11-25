@@ -29,7 +29,7 @@ Plugin 'Lokaltog/vim-easymotion'                      " Use easy motion for sear
 Plugin 'Valloric/YouCompleteMe'                       " Fancy auto complete
 Plugin 'simnalamburt/vim-mundo'                       " History keeping
 Plugin 'editorconfig/editorconfig-vim'                " support for .editorconfig files
-Plugin 'nathanaelkane/vim-indent-guides'              " Show indentations easily
+Plugin 'Yggdroot/indentLine'                          " Show indentations easily
 Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 Plugin 'ap/vim-css-color'                             " display colors in vim
@@ -188,17 +188,12 @@ set undodir=$HOME/.vim/undo                        "  where to save undo histori
 set undolevels=1000                                "  How many undos
 set undoreload=10000                               "  number of lines to save for undo
 
-" highlighting indentation settings
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=0 guifg=#4F504B guibg=#3C3D38
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guifg=#3C3D38 guibg=#4F504B
-
 
 " tmux navigator settings
 let g:tmux_navigator_save_on_switch = 1
+
+" highlighting indentation settings
+let g:indentLine_char = '│'
 
 " Indentation doesn't exit visual mode
 vnoremap < <gv
