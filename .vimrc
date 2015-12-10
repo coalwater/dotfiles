@@ -34,10 +34,12 @@ Plugin 'ctrlpvim/ctrlp.vim'                           " fuzzy searching
 Plugin 'edkolev/tmuxline.vim'                         " tmux with airline
 Plugin 'ap/vim-css-color'                             " display colors in vim
 Plugin 'StanAngeloff/php.vim'                         " php ctags
-Plugin 'troydm/zoomwintab.vim'                        " split windows maximize and minimize
 Plugin 'christoomey/vim-tmux-navigator'               " tmux navigator
+Plugin 'uguu-org/vim-matrix-screensaver'
 Plugin 'wesQ3/vim-windowswap'                         " moving splits
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'rking/ag.vim'
+Plugin 'qpkorr/vim-bufkill'
 
 " color schemes
 Plugin 'vim-scripts/molokai'
@@ -47,6 +49,7 @@ Plugin 'morhetz/gruvbox'
 
 call vundle#end()                                     " required
 
+syntax on                                             " syntax highlighting
 filetype plugin indent on                             " required
 
 
@@ -57,7 +60,8 @@ nmap <F5> :source Session.vim<CR>
 " " airline
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
-let g:airline_theme = 'dark'
+let g:airline#extensions#tmuxline#enabled = 0
+let g:airline_theme = 'gruvbox'
 
 " fix powerlines
 if !exists('g:airline_symbols')
@@ -72,10 +76,10 @@ set backupdir=~/.vim/backups
 " " CtrlP Settings
 " ctrlp exclude
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v\.(git|hg|svn|orig)$|\vtmp|\vdoc|\vcoverage|\vtags',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': '',
-  \ }
+      \ 'dir':  '\v\.(git|hg|svn|orig)$|\vtmp|\vdoc|\vcoverage|\vtags',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': '',
+      \ }
 
 " utility shorcuts for ctrlp
 map <M-p> :CtrlPBufTag<cr>                           " list all tags in current open buffer
@@ -98,12 +102,14 @@ endif
 " syntastic
 let g:syntastic_mode_map = { "mode": "passive" }
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_enable_signs = 1
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_ruby_rubocop_args = '-c .rubocop.yml --force-exclusion'
-:
+let g:syntastic_enable_signs = 1
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_auto_loc_list = 1
+
 let g:syntastic_ruby_exec = 'ruby'
-let g:syntastic_ruby_checkers = ['mri', 'rubocop', 'flog']
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 
 " rails.vim settings
 let g:rubycomplete_buffer_loading = 1
@@ -134,7 +140,6 @@ set ruler
 set showmatch                                         " show matching bracket
 set nohlsearch                                        " remove highligting after search complete
 set list listchars=tab:»·,trail:·,nbsp:·              " Display trailing whitespace and tabs
-syntax on                                             " syntax highlighting
 
 " tabs and spaces
 set tabstop=2
@@ -150,9 +155,7 @@ vnoremap <silent> j gj
 vnoremap <silent> k gk
 
 " space + w closes buffer
-nnoremap <leader>w :bd<CR>
-" space + w closes location buffer
-nnoremap <leader>l :lclose<CR>
+nnoremap <leader>w :BD<CR>
 " space + q closes all buffers
 nnoremap <leader>q :%bd<CR>
 " space + space + q closes all
@@ -210,36 +213,46 @@ map <C-l> <C-W>l
 map <leader>gf :e <cfile><cr>
 
 map <C-s> :w<cr>                                " ctrl + s for saving
-map <M-q> :SyntasticToggleMode<cr>              " Run the syntastic checks
+map <M-q> :SyntasticCheck<cr>              " Run the syntastic checks
 
 " more natural splitting locations
 set splitbelow
 set splitright
 
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DastrkOrchid3'],
-    \ ]
+" ctrl+h fix for neovim
+if has('nvim')
+  nmap <bs> :TmuxNavigateLeft<cr>
+endif
 
+let g:rbpt_colorpairs = [
+      \ ['brown',       'RoyalBlue3'],
+      \ ['Darkblue',    'SeaGreen3'],
+      \ ['darkgray',    'DarkOrchid3'],
+      \ ['darkgreen',   'firebrick3'],
+      \ ['darkcyan',    'RoyalBlue3'],
+      \ ['darkred',     'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['gray',        'RoyalBlue3'],
+      \ ['black',       'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['Darkblue',    'firebrick3'],
+      \ ['darkgreen',   'RoyalBlue3'],
+      \ ['darkcyan',    'SeaGreen3'],
+      \ ['darkred',     'DastrkOrchid3'],
+      \ ]
+
+let g:rbpt_max = 16
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-let g:rbpt_max = 16
 
 " color schemes
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italic=1
 colorscheme gruvbox
+
+" ag.vim
+nmap  <silent> <leader>e :Ag "<cword>" <CR>
+
+nnoremap <M-F> gg=G``

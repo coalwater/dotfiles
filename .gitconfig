@@ -18,3 +18,5 @@
 	autocorrect = -1
 [log]
 	decorate = auto
+[rebase]
+  autostash = true
