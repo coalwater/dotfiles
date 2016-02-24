@@ -181,12 +181,12 @@ nnoremap <F12> :bn<cr>
 map / <Plug>(easymotion-sn)
 
 
-" Gundo shortcut
-nnoremap <F4> :GundoToggle<CR>
-let g:gundo_preview_bottom = 1
-let g:gundo_close_on_revert = 1
-let g:gundo_width = 30
-let g:gundo_preview_height = 40
+" Mundo shortcut
+nnoremap <F4> :MundoToggle<CR>
+let g:mundo_preview_bottom = 1
+let g:mundo_close_on_revert = 1
+let g:mundo_width = 30
+let g:mundo_preview_height = 40
 
 set undofile                                       "  Save undo's after file closes
 set undodir=$HOME/.vim/undo                        "  where to save undo histories
