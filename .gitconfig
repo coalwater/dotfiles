@@ -18,5 +18,8 @@
 	autocorrect = -1
 [log]
 	decorate = auto
+[commit]
+  verbose = true
+  gpgsign = true
 [rebase]
   autostash = true
