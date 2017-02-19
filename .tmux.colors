@@ -26,4 +26,3 @@ set -g status-left "#[fg=colour243,bg=colour234,bold] #S #[fg=colour234,bg=colou
 set -g status-right "#[fg=colour243,bg=colour239,nobold,nounderscore,noitalics]#[fg=colour234,bg=colour243,bold] %Y-%m-%d  %H:%M #[fg=colour234,bg=colour243,nobold,nounderscore,noitalics]#[fg=colour243,bg=colour234,bold] #h "
 setw -g window-status-format "#[fg=colour246,bg=colour239,bold] #I #[fg=colour246,bg=colour239,bold] #W "
 setw -g window-status-current-format "#[fg=colour239,bg=colour243,nobold,nounderscore,noitalics]#[fg=colour234,bg=colour243,bold] #I #[fg=colour234,bg=colour243,bold] #W #[fg=colour243,bg=colour239,nobold,nounderscore,noitalics]"
-set -g window-active-style "bg=black"
