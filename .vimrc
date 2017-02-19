@@ -26,7 +26,6 @@ Plugin 'tpope/vim-surround'                           " Useful surround function
 Plugin 'tpope/vim-endwise'                            " Adding 'end' in ruby
 Plugin 'tpope/vim-obsession'                          " Vim session saving
 Plugin 'Lokaltog/vim-easymotion'                      " Use easy motion for search
-Plugin 'Valloric/YouCompleteMe'                       " Fancy auto complete
 Plugin 'simnalamburt/vim-mundo'                       " History keeping
 Plugin 'editorconfig/editorconfig-vim'                " support for .editorconfig files
 Plugin 'Yggdroot/indentLine'                          " Show indentations easily
@@ -40,6 +39,8 @@ Plugin 'wesQ3/vim-windowswap'                         " moving splits
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'rking/ag.vim'
 Plugin 'qpkorr/vim-bufkill'
+Plugin 't9md/vim-quickhl'
+Plugin 'Shougo/deoplete.nvim'
 
 " color schemes
 Plugin 'vim-scripts/molokai'
@@ -51,6 +52,16 @@ call vundle#end()                                     " required
 
 syntax on                                             " syntax highlighting
 filetype plugin indent on                             " required
+
+set maxmempattern=200000
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources.ruby = ['omni']
+let g:deoplete#auto_complete_delay = 300
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 " " Obsession
@@ -70,19 +81,24 @@ endif
 let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#enabled = 1          " shows tabs
 
+"airline sections
+let g:airline_section_w = airline#section#create(['%{ObsessionStatus()}'])
+
 " backup path
-set backupdir=~/.vim/backups
+set backup
+set backupdir=$HOME/.vim/backups,.
 
 " " CtrlP Settings
 " ctrlp exclude
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v\.(git|hg|svn|orig)$|\vtmp|\vdoc|\vcoverage|\vtags',
+      \ 'dir':  '\v\.(git|hg|svn|orig)$|\vtmp|\vdoc|\vcoverage|\vtags|\vnode_modules',
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': '',
       \ }
 
 " utility shorcuts for ctrlp
 map <M-p> :CtrlPBufTag<cr>                           " list all tags in current open buffer
+map <M-P> :CtrlPTag<cr>
 map <M-o> :CtrlPBuffer<cr>                           " list buffers for select
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
@@ -96,6 +112,7 @@ if executable('ag')
   "  }
 
   let g:ctrlp_use_caching = 0
+  let g:ctrlp_match_current_file = 1
 endif
 
 
@@ -112,8 +129,9 @@ let g:syntastic_ruby_exec = 'ruby'
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 
 " rails.vim settings
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_rails = 1
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " ruby.vim settings
 let ruby_spellcheck_strings = 1
@@ -171,7 +189,7 @@ command Q q
 nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>          " Leader + Right shows hunk
 nnoremap <M-j> :GitGutterNextHunk<CR>                    " Alt + Down shows next hunk
 nnoremap <M-k> :GitGutterPrevHunk<CR>                      " Alt + Up shows previous hunk
-nnoremap <Leader><Leader><Left> :GitGutterRevertHunk<CR>    " Leader + Leader + left reverts hunk
+nnoremap <Leader><Leader><Left> :GitGutterUndoHunk<CR>    " Leader + Leader + left reverts hunk
 
 " alt + direction for buffer swapping
 nnoremap <F11> :bp<cr>
@@ -193,7 +211,6 @@ set undodir=$HOME/.vim/undo                        "  where to save undo histori
 set undolevels=1000                                "  How many undos
 set undoreload=10000                               "  number of lines to save for undo
 
-
 " tmux navigator settings
 let g:tmux_navigator_save_on_switch = 1
 
@@ -214,6 +231,9 @@ map <leader>gf :e <cfile><cr>
 
 map <C-s> :w<cr>                                " ctrl + s for saving
 map <M-q> :SyntasticCheck<cr>              " Run the syntastic checks
+
+" Ag search
+map <leader>s :Ag <cword><cr>
 
 " more natural splitting locations
 set splitbelow
@@ -254,5 +274,9 @@ colorscheme gruvbox
 
 " ag.vim
 nmap  <silent> <leader>e :Ag "<cword>" <CR>
+
+" vim-quickhl
+nmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
 
 nnoremap <M-F> gg=G``
