@@ -1,0 +1,51 @@
+general {
+  colors = true
+  interval = 1
+  separator = ' | '
+}
+
+order += "battery 0"
+order += 'backlight'
+order += "volume master"
+order += "tztime local"
+order += "static_string"
+
+
+backlight {
+  button_down = 0
+  button_up = 0
+  cache_timeout = 1
+  format = '☀ {level}%'
+  on_click 4 = 'exec --no-startup-id light -A 5'
+  on_click 5 = 'exec --no-startup-id light -U 5'
+}
+
+volume master {
+  format = "  🕪 %volume"
+  format_muted = "🕨 muted (%volume)"
+  device = "default"
+  mixer = "Master"
+  mixer_idx = 0
+  on_click 4 = 'exec --no-startup-id pactl set-sink-volume 0 +5%'
+  on_click 5 = 'exec --no-startup-id pactl set-sink-volume 0 -5%'
+}
+
+
+tztime local {
+  format = "%Y/%m/%d %H:%M:%S"
+}
+
+battery 0 {
+  format = "%status %percentage %remaining"
+  format_down = "No battery"
+  status_chr = "⚡"
+  status_bat = "🔋"
+  status_unk = "?"
+  status_full = "🔌"
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 15
+}
+
+static_string {
+ format = "Mohammad AbuShady"
+}
