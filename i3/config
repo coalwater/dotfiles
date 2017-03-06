@@ -97,14 +97,14 @@ bindsym $mod+minus scratchpad show
 
 # switch to workspace
 # workspaces
-set $work1 1: Browser
-set $work2 2: Terminal
+set $work1 1: Terminal
+set $work2 2: Browser
 set $work3 3
 set $work4 4
 set $work5 5
 set $work6 6
 set $work7 7
-set $work8 8
+set $work8 8: Music
 set $work9 9: Mail
 set $work10 10: Messengers
 
