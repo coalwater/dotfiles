@@ -184,10 +184,13 @@ bar {
 }
 
 # Auto assign
-assign [class="Firefox" instance="Navigator"] $work1
+assign [class="Firefox" instance="Navigator"] $work2
+assign [class="Deluge"] $work7
+assign [instance="spotify"] $work8
 assign [class="Thunderbird"] $work9
 assign [class="Slack"] $work10
 assign [class="Caprine"] $work10
+for_window [class="Spotify"] move to workspace $work8
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
