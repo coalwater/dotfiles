@@ -171,6 +171,7 @@ bar {
     status_command py3status -c ~/.config/i3status/top
     tray_output primary
     position top
+    font pango:FontAwesome, Fantasque Sans Mono
 }
 
 bar {
@@ -179,6 +180,7 @@ bar {
     tray_output none
     position bottom
     workspace_buttons no
+    font pango:FontAwesome, Fantasque Sans Mono
 }
 
 # Auto assign
