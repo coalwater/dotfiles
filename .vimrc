@@ -280,3 +280,4 @@ nmap <Space>m <Plug>(quickhl-manual-this)
 nmap <Space>M <Plug>(quickhl-manual-reset)
 
 nnoremap <M-F> gg=G``
+set colorcolumn=81,121
