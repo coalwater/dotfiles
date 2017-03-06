@@ -4,25 +4,44 @@ general {
   separator = ' | '
 }
 
-order += "battery 0"
+order += 'weather_yahoo'
+order += 'keyboard_layout'
+order += 'static_string playpause'
+order += "battery_level"
 order += 'backlight'
 order += "volume master"
 order += "tztime local"
 order += "static_string"
 
+weather_yahoo {
+  woeid = '1521643'
+  forecast_days = 0
+  format_today = "{icon} {temp}°{units} {text}"
+}
+
+keyboard_layout {
+  cache_timeout = 1
+  on_click 1 = 'exec setxkbmap us'
+  on_click 3 = 'exec setxkbmap ar'
+}
+
+static_string playpause {
+  format = ''
+  on_click 1 = 'exec playerctl play-pause'
+}
 
 backlight {
   button_down = 0
   button_up = 0
   cache_timeout = 1
-  format = '☀ {level}%'
+  format = '{level}% '
   on_click 4 = 'exec --no-startup-id light -A 5'
   on_click 5 = 'exec --no-startup-id light -U 5'
 }
 
 volume master {
-  format = "  🕪 %volume"
-  format_muted = "🕨 muted (%volume)"
+  format = "%volume "
+  format_muted = "%volume "
   device = "default"
   mixer = "Master"
   mixer_idx = 0
@@ -32,18 +51,20 @@ volume master {
 
 
 tztime local {
-  format = "%Y/%m/%d %H:%M:%S"
+  format = "%a %Y/%m/%d %H:%M:%S"
 }
 
-battery 0 {
-  format = "%status %percentage %remaining"
+battery_level {
+  blocks = ''
+  cache_timeout = 1
+  format = '{percent}% {time_remaining} {icon}'
   format_down = "No battery"
-  status_chr = "⚡"
-  status_bat = "🔋"
-  status_unk = "?"
-  status_full = "🔌"
-  path = "/sys/class/power_supply/BAT%d/uevent"
-  low_threshold = 15
+  charging_character = ""
+  hide_seconds = true
+  color_charging = '#66B2FF'
+  color_good = '#00FF00'
+  color_degraded = '#FFFF00'
+  color_bad = '#FF0000'
 }
 
 static_string {

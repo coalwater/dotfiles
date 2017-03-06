@@ -11,6 +11,7 @@ order += "ethernet eth0"
 order += "wifi"
 
 wifi {
+  cache_timeout = 1
   format_up = '{ip} {ssid} {bitrate} {icon}'
 }
 
@@ -18,6 +19,9 @@ online_status {
   cache_timeout = 1
   url = 'http://yahoo.com'
   format = 'Online Status: {icon}'
+  icon_on = ''
+  icon_off = ''
+
 }
 
 ethernet eth0 {
@@ -46,7 +50,7 @@ sysdata {
 net_rate {
   cache_timeout = 1
   unit = 'kB/s'
-  format = "[\?color=up {up}][\?color=down {down}]"
+  format = "[\?color=up {up}] \| [\?color=down {down}]"
   thresholds = {
     'up': [
       (0, 'good'),
