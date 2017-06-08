@@ -1,0 +1,100 @@
+general {
+  colors = true
+  interval = 1
+  separator = ' | '
+}
+
+order += 'weather_yahoo'
+order += "pomodoro"
+order += "sysdata"
+order += "group disks"
+order += "net_rate"
+order += "online_status"
+order += "ethernet eth0"
+order += "wifi"
+
+wifi {
+  cache_timeout = 1
+  format_up = '{ip} {ssid} {bitrate} {icon}'
+  on_click 1 = 'exec gnome-control-center network'
+}
+
+group disks {
+  cycle = 10
+  click_mode = "button"
+  format = "{output} {button}"
+
+  diskdata "/" {
+    disk = "nvme0n1p7"
+    format = ' /home {used_percent}% ({total})'
+  }
+
+  diskdata "/home" {
+    disk = "nvme0n1p5"
+    format = ' / {used_percent}% ({total})'
+  }
+}
+
+online_status {
+  cache_timeout = 1
+  url = 'http://yahoo.com'
+  format = '{icon}'
+  icon_on = ''
+  icon_off = ''
+
+}
+
+ethernet eth0 {
+# if you use %speed, i3status requires the cap_net_admin capability
+  format_up = "E: %ip (%speed)"
+    format_down = ""
+}
+
+sysdata {
+  cache_timeout = 1
+  format = "[\?color=cpu  {cpu_usage}%]   [\?color=mem 🖫 {mem_used_percent}%]"
+  thresholds = {
+    'cpu': [
+      (0, 'good'),
+      (30, 'degraded'),
+      (100, 'bad'),
+    ],
+    'mem': [
+      (0, 'good'),
+      (50, 'degraded'),
+      (80, 'bad'),
+    ],
+  }
+}
+
+net_rate {
+  cache_timeout = 1
+  unit = 'kB/s'
+  format = "[\?color=up {up}]   [\?color=down {down}]"
+  thresholds = {
+    'up': [
+      (0, 'good'),
+      (10240, 'degraded'),
+      (102400, 'bad'),
+    ],
+    'down': [
+      (0, 'good'),
+      (51200, 'degraded'),
+      (512000, 'bad'),
+    ],
+  }
+}
+
+weather_yahoo {
+  woeid = '727232'
+  forecast_days = 0
+  format_today = "{icon} {temp}°{units} {text}"
+  cache_timeout = 900
+}
+
+pomodoro {
+  max_breaks = 9
+  format = '{mmss}'
+  format_separator = ':'
+  timer_pomodoro = 3000
+}

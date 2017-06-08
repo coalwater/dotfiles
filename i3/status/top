@@ -1,0 +1,60 @@
+general {
+  colors = true
+  interval = 1
+  separator = ' |-| '
+}
+
+order += 'keyboard_layout'
+order += "battery_level"
+order += 'backlight'
+order += "volume master"
+order += "tztime local"
+order += "static_string"
+
+keyboard_layout {
+  cache_timeout = 1
+  on_click 1 = 'exec setxkbmap us'
+  on_click 3 = 'exec setxkbmap ar'
+}
+
+backlight {
+  button_down = 0
+  button_up = 0
+  cache_timeout = 1
+  format = '{level}% '
+  on_click 4 = 'exec --no-startup-id light -A 5'
+  on_click 5 = 'exec --no-startup-id light -U 5'
+}
+
+volume master {
+  format = "%volume "
+  format_muted = "%volume "
+  device = "default"
+  mixer = "Master"
+  mixer_idx = 0
+  on_click 1 = 'exec --no-startup-id gnome-control-center sound'
+  on_click 4 = 'exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep RUNNING | cut -c1` +5%'
+  on_click 5 = 'exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep RUNNING | cut -c1` -5%'
+}
+
+
+tztime local {
+  format = "%a %Y/%m/%d %H:%M:%S"
+}
+
+battery_level {
+  blocks = ''
+  cache_timeout = 1
+  format = '{percent}% {time_remaining} {icon}'
+  format_down = "No battery"
+  charging_character = ""
+  hide_seconds = true
+  color_charging = '#66B2FF'
+  color_good = '#00FF00'
+  color_degraded = '#FFFF00'
+  color_bad = '#FF0000'
+}
+
+static_string {
+ format = "Mohammad AbuShady"
+}
