@@ -56,23 +56,27 @@ set $work1 1: Terminal
 set $work2 2: Browser
 set $work3 3
 set $work4 4
-set $work5 5
+set $work5 5: Chat
 set $work6 6: Mail
 set $work7 7: Messengers
 set $work8 8: Music
 set $work9 9
 set $work10 10
+set $work11 11
+set $work12 12
 
-workspace "$work1" output $main
-workspace "$work2" output $main
-workspace "$work3" output $main
-workspace "$work4" output $main
-workspace "$work5" output $main
-workspace "$work6" output $main
-workspace "$work7" output $main
-workspace "$work8" output $main
+workspace "$work1" output $main_output
+workspace "$work2" output $main_output
+workspace "$work3" output $main_output
+workspace "$work4" output $main_output
+workspace "$work5" output $main_output
+workspace "$work6" output $main_output
+workspace "$work7" output $main_output
+workspace "$work8" output $main_output
 workspace "$work9" output $extra_output
 workspace "$work10" output $extra_output
+workspace "$work11" output $extra_output
+workspace "$work12" output $extra_output
 
 bindsym $mod+1 workspace $work1
 bindsym $mod+2 workspace $work2
@@ -156,6 +160,7 @@ assign [class="^Vivaldi" window_role="app"] $work2
 assign [class="Thunderbird"] $work6
 assign [class="Slack"] $work7
 assign [class="Caprine"] $work7
+assign [class="Meld"] $work1
 
 # spotify doesn't have class when or instance when it's launched
 # use for_window for assigning after the properties are changed.
@@ -171,6 +176,7 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 bindsym XF86Sleep exec --no-startup-id systemctl suspend
+bindsym XF86PowerOff exec --no-startup-id systemctl suspend
 
 
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
@@ -178,8 +184,6 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
 
 bindsym Mod1+Ctrl+l exec --no-startup-id i3lock -c 000000
 
-bindsym $mod+Right workspace next
-bindsym $mod+Left workspace prev
 bindsym $mod+F9 exec --no-startup-id xinput --set-prop --type=int --format=8 "Logitech M525" "libinput Natural Scrolling Enabled" 1
 bindsym $mod+F10 exec --no-startup-id touchpad-toggle.sh
 bindsym $mod+F11 exec --no-startup-id ~/.screenlayout/off

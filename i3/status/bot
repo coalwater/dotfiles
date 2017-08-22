@@ -52,6 +52,7 @@ ethernet eth0 {
 
 sysdata {
   cache_timeout = 1
+  on_click 1 = 'exec gnome-system-monitor'
   format = "[\?color=cpu  {cpu_usage}%]   [\?color=mem 🖫 {mem_used_percent}%]"
   thresholds = {
     'cpu': [

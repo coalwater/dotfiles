@@ -39,12 +39,12 @@ volume master {
 
 
 tztime local {
-  format = "%a %Y/%m/%d %H:%M:%S"
+  format = "%a %d/%m/%Y %H:%M:%S"
 }
 
 battery_level {
   blocks = ''
-  cache_timeout = 1
+  cache_timeout = 5
   format = '{percent}% {time_remaining} {icon}'
   format_down = "No battery"
   charging_character = ""
@@ -53,6 +53,7 @@ battery_level {
   color_good = '#00FF00'
   color_degraded = '#FFFF00'
   color_bad = '#FF0000'
+  measurement_mode = 'acpi'
 }
 
 static_string {
