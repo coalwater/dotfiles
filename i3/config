@@ -192,5 +192,7 @@ bindsym $mod+F12 exec --no-startup-id ~/.screenlayout/on
 bindsym $mod+minus exec --no-startup-id fish -c 'dynamic_ws'
 bindsym $mod+Shift+minus exec --no-startup-id fish -c 'dynamic_move'
 
+bindsym Print exec --no-startup-id gnome-screenshot --area
+
 exec --no-startup-id xautolock -time 5 -locker 'i3lock -c000000'
 exec --no-startup-id xinput --set-prop --type=int --format=8 "ELAN Touchscreen" "Device Enabled" 0
