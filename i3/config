@@ -191,6 +191,7 @@ bindsym $mod+F12 exec --no-startup-id ~/.screenlayout/on
 
 bindsym $mod+minus exec --no-startup-id fish -c 'dynamic_ws'
 bindsym $mod+Shift+minus exec --no-startup-id fish -c 'dynamic_move'
+bindsym $mod+i exec --no-startup-id fish -c 'i3-msg (echo -n '' | dmenu)'
 
 bindsym Print exec --no-startup-id gnome-screenshot --area
 
