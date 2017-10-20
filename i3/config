@@ -58,7 +58,7 @@ set $work3 3
 set $work4 4
 set $work5 5: Chat
 set $work6 6: Mail
-set $work7 7: Messengers
+set $work7 7
 set $work8 8: Music
 set $work9 9
 set $work10 10
@@ -73,6 +73,9 @@ workspace "$work5" output $main_output
 workspace "$work6" output $main_output
 workspace "$work7" output $main_output
 workspace "$work8" output $main_output
+
+workspace "# Slack" output $main_output
+
 workspace "$work9" output $extra_output
 workspace "$work10" output $extra_output
 workspace "$work11" output $extra_output
@@ -158,9 +161,9 @@ bar {
 # Auto assign
 assign [class="^Vivaldi" window_role="app"] $work2
 assign [class="Thunderbird"] $work6
-assign [class="Slack"] $work7
 assign [class="Caprine"] $work7
 assign [class="Meld"] $work1
+assign [class="Slack"] # Slack
 
 # spotify doesn't have class when or instance when it's launched
 # use for_window for assigning after the properties are changed.
