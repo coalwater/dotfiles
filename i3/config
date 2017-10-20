@@ -75,6 +75,7 @@ workspace "$work7" output $main_output
 workspace "$work8" output $main_output
 
 workspace "# Slack" output $main_output
+workspace "# Spotify" output $main_output
 
 workspace "$work9" output $extra_output
 workspace "$work10" output $extra_output
@@ -167,8 +168,7 @@ assign [class="Slack"] # Slack
 
 # spotify doesn't have class when or instance when it's launched
 # use for_window for assigning after the properties are changed.
-assign [instance="spotify"] $work8
-for_window [class="Spotify"] move to workspace $work8
+for_window [class="Spotify"] move to workspace # Spotify
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume_up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume_down
