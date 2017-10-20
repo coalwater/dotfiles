@@ -195,6 +195,7 @@ bindsym $mod+F12 exec --no-startup-id ~/.screenlayout/on
 bindsym $mod+minus exec --no-startup-id fish -c 'i3-msg workspace (echo -n '' | dmenu)'
 bindsym $mod+Shift+minus exec --no-startup-id fish -c 'i3-msg move container to workspace (echo -n '' | dmenu)'
 bindsym $mod+i exec --no-startup-id fish -c 'i3-msg (echo -n '' | dmenu)'
+bindsym $mod+t exec --no-startup-id fish -c 'i3-msg title_format (echo -n '' | dmenu)'
 
 bindsym Print exec --no-startup-id gnome-screenshot --area
 
