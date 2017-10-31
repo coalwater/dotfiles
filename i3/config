@@ -82,16 +82,16 @@ workspace "$work10" output $extra_output
 workspace "$work11" output $extra_output
 workspace "$work12" output $extra_output
 
-bindsym $mod+1 workspace $work1
-bindsym $mod+2 workspace $work2
-bindsym $mod+3 workspace $work3
-bindsym $mod+4 workspace $work4
-bindsym $mod+5 workspace $work5
-bindsym $mod+6 workspace $work6
-bindsym $mod+7 workspace $work7
-bindsym $mod+8 workspace $work8
-bindsym $mod+9 workspace $work9
-bindsym $mod+0 workspace $work10
+bindsym $mod+1 workspace number $work1
+bindsym $mod+2 workspace number $work2
+bindsym $mod+3 workspace number $work3
+bindsym $mod+4 workspace number $work4
+bindsym $mod+5 workspace number $work5
+bindsym $mod+6 workspace number $work6
+bindsym $mod+7 workspace number $work7
+bindsym $mod+8 workspace number $work8
+bindsym $mod+9 workspace number $work9
+bindsym $mod+0 workspace number $work10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $work1
