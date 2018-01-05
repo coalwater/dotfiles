@@ -4,12 +4,14 @@ general {
   separator = ' |-| '
 }
 
+order += "external_script vagrant"
 order += 'keyboard_layout'
 order += "battery_level"
 order += 'backlight'
+order += "external_script sink_name"
 order += "volume master"
 order += "tztime local"
-order += "static_string"
+order += "static_string name"
 
 keyboard_layout {
   cache_timeout = 1
@@ -22,8 +24,8 @@ backlight {
   button_up = 0
   cache_timeout = 1
   format = '{level}% '
-  on_click 4 = 'exec --no-startup-id light -A 5'
-  on_click 5 = 'exec --no-startup-id light -U 5'
+  on_click 4 = 'exec --no-startup-id light -A 1'
+  on_click 5 = 'exec --no-startup-id light -U 1'
 }
 
 volume master {
@@ -33,13 +35,14 @@ volume master {
   mixer = "Master"
   mixer_idx = 0
   on_click 1 = 'exec --no-startup-id gnome-control-center sound'
-  on_click 4 = 'exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep RUNNING | cut -c1` +5%'
-  on_click 5 = 'exec --no-startup-id pactl set-sink-volume `pactl list short sinks | grep RUNNING | cut -c1` -5%'
+  on_click 4 = 'exec --no-startup-id ~/.config/i3/scripts/volume_up'
+  on_click 5 = 'exec --no-startup-id ~/.config/i3/scripts/volume_down'
 }
 
 
 tztime local {
   format = "%a %d/%m/%Y %H:%M:%S"
+  timezone "Europe/Amsterdam"
 }
 
 battery_level {
@@ -56,6 +59,18 @@ battery_level {
   measurement_mode = 'acpi'
 }
 
-static_string {
+static_string name {
  format = "Mohammad AbuShady"
+ color = '#3e73ef'
+}
+
+external_script sink_name {
+ script_path = '~/.config/i3/scripts/active_sink_name'
+}
+
+external_script vagrant {
+ script_path = '~/.config/i3/scripts/vagrant_status'
+ format = '{output}'
+ on_click 1 = 'exec --no-startup-id ~/.config/i3/scripts/toggle_vagrant'
+ cache_timeout = 5
 }

@@ -94,7 +94,7 @@ weather_yahoo {
 }
 
 pomodoro {
-  max_breaks = 9
+  max_breaks = 3
   format = '{mmss}'
   format_separator = ':'
   timer_pomodoro = 3000
