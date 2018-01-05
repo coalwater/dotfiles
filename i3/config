@@ -1,7 +1,12 @@
 set $mod Mod4
 set $term gnome-terminal
+set $laptop_output eDP-1
+set $external_output DP-1
+set $dual_1_output DP-1-1
+set $dual_2_output DP-1-2
+
 set $main_output eDP-1
-set $extra_output DP-1
+set $extra_output DP-1-1
 
 font pango:Fantasque Sans Mono 10
 font pango:FontAwesome, pango:Fantasque Sans Mono
@@ -14,9 +19,8 @@ set $right l
 floating_modifier $mod
 focus_follows_mouse no
 focus_on_window_activation focus
-workspace_auto_back_and_forth yes
 force_display_urgency_hint 1000 ms
-mouse_warping none
+mouse_warping output
 
 
 bindsym $mod+Return exec $term
@@ -144,8 +148,9 @@ bar {
 
 bar {
     id bar-top-extra
-    output $extra_output
-    tray_output primary
+    output $dual_1_output
+    output $dual_2_output
+    tray_output none
     position top
     font pango:FontAwesome, pango:Fantasque Sans Mono
 }
@@ -189,8 +194,11 @@ bindsym Mod1+Ctrl+l exec --no-startup-id i3lock -c 000000
 
 bindsym $mod+F9 exec --no-startup-id xinput --set-prop --type=int --format=8 "Logitech M525" "libinput Natural Scrolling Enabled" 1
 bindsym $mod+F10 exec --no-startup-id touchpad-toggle.sh
-bindsym $mod+F11 exec --no-startup-id ~/.screenlayout/off
-bindsym $mod+F12 exec --no-startup-id ~/.screenlayout/on
+bindsym $mod+F11 exec --no-startup-id ~/.screenlayout/off.sh
+bindsym $mod+F12 exec --no-startup-id ~/.screenlayout/dual.sh
+
+bindsym $mod+Right workspace next_on_output
+bindsym $mod+Left workspace prev_on_output
 
 bindsym $mod+minus exec --no-startup-id fish -c 'i3-msg workspace (echo -n '' | dmenu)'
 bindsym $mod+Shift+minus exec --no-startup-id fish -c 'i3-msg move container to workspace (echo -n '' | dmenu)'
