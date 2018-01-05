@@ -1,0 +1,2 @@
+#!/bin/bash
+pacmd list-sinks | grep '*' | pcregrep -o '([0-9]*)'

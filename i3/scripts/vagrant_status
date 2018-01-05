@@ -1,0 +1,4 @@
+#!/bin/sh
+cd ~/projects/ansible-devops
+vstatus=`vagrant status | grep default | sed 's/\s\+/ /g' | cut -d' ' -f 2`
+echo "Vagrant: $vstatus"

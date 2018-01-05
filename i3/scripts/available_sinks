@@ -1,0 +1,2 @@
+#!/bin/sh
+sinks=`pactl list sinks short | sed 's/\s\+/ /g' | cut -d' ' -f 1`

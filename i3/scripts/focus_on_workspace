@@ -1,0 +1,7 @@
+#!/bin/bash
+selected_workspace=`i3-msg -t get_workspaces | jq -r '.[] | .name' | dmenu`
+if [ "$selected_workspace" == '' ]; then
+  exit
+else
+  `i3-msg workspace \""$selected_workspace"\" > /dev/null`
+fi

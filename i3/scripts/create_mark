@@ -1,0 +1,7 @@
+#!/bin/bash
+selected_mark=`echo -n '' | dmenu`
+if [ "$selected_mark" == '' ]; then
+  exit
+else
+  `i3-msg mark \""$selected_mark"\" > /dev/null`
+fi

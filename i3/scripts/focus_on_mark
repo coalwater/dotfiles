@@ -1,0 +1,5 @@
+#!/bin/bash
+selected_mark=`i3-msg -t get_marks | jq -r '.[]' | dmenu`
+if [ "$selected_mark" != "" ]; then
+  `i3-msg [con_mark=\""$selected_mark"\"] focus > /dev/null`
+fi

@@ -1,0 +1,13 @@
+#!/bin/bash
+available_workspaces= `i3-msg -t get_workspaces | jq -r '.[] | .name'`
+selected_workspace=`i3-msg -t get_workspaces | jq -r '.[] | .name' | dmenu`
+if [[ $selected_workspace == '' ]]; then
+  exit
+elif [[ $selected_workspace == '#*' ]]; then
+  prefix=""
+elif [[ $selected_workspace =~ ^[0-9] ]]; then
+  prefix=""
+else
+  prefix="`~/.config/i3/scripts/next_available_workspace`: "
+fi
+i3-msg move container to workspace \""$prefix$selected_workspace"\" > /dev/null

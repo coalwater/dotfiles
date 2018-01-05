@@ -1,0 +1,9 @@
+#!/bin/sh
+vagrant_status=`~/.config/i3/scripts/vagrant_status`
+cd ~/projects/ansible-devops
+if [[ $vagrant_status = 'poweroff' ]]; then
+  vagrant up
+else
+  vagrant halt
+fi
+

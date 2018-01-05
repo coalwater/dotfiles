@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+workspaces = `i3-msg -t get_workspaces | jq '.[] | .num'`
+workspaces = workspaces.split("\n")
+candidate_workspaces = %w[1 2 3 4 5 6 7 8 9 10 11 -1] - workspaces
+puts candidate_workspaces.first
