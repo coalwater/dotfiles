@@ -52,18 +52,20 @@ bindsym $mod+z focus child
 # bindsym $mod+minus scratchpad show
 
 # workspaces
-set $work1 1: Terminal
-set $work2 2: Browser
+set $work1 1
+set $work2 2
 set $work3 3
 set $work4 4
-set $work5 5: Chat
-set $work6 6: Mail
+set $work5 5
+set $work6 6
 set $work7 7
-set $work8 8: Music
+set $work8 8
 set $work9 9
 set $work10 10
-set $work11 11
-set $work12 12
+set $slack_workspace 6: slack
+set $spotify_workspace 8: spotify
+set $meld_workspace #meld
+set $mail_workspace 7: mail
 
 workspace "$work1" output $main_output
 workspace "$work2" output $main_output
@@ -74,13 +76,13 @@ workspace "$work6" output $main_output
 workspace "$work7" output $main_output
 workspace "$work8" output $main_output
 
-workspace "# Slack" output $main_output
-workspace "# Spotify" output $main_output
+workspace "$slack_workspace" output $main_output
+workspace "$spotify_workspace" output $main_output
+workspace "$meld_workspace" output $dual_2_output
+workspace "$mail_workspace" output $main_output
 
 workspace "$work9" output $extra_output
 workspace "$work10" output $extra_output
-workspace "$work11" output $extra_output
-workspace "$work12" output $extra_output
 
 bindsym $mod+1 workspace number $work1
 bindsym $mod+2 workspace number $work2
@@ -94,16 +96,16 @@ bindsym $mod+9 workspace number $work9
 bindsym $mod+0 workspace number $work10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $work1
-bindsym $mod+Shift+2 move container to workspace $work2
-bindsym $mod+Shift+3 move container to workspace $work3
-bindsym $mod+Shift+4 move container to workspace $work4
-bindsym $mod+Shift+5 move container to workspace $work5
-bindsym $mod+Shift+6 move container to workspace $work6
-bindsym $mod+Shift+7 move container to workspace $work7
-bindsym $mod+Shift+8 move container to workspace $work8
-bindsym $mod+Shift+9 move container to workspace $work9
-bindsym $mod+Shift+0 move container to workspace $work10
+bindsym $mod+Shift+1 move container to workspace number $work1
+bindsym $mod+Shift+2 move container to workspace number $work2
+bindsym $mod+Shift+3 move container to workspace number $work3
+bindsym $mod+Shift+4 move container to workspace number $work4
+bindsym $mod+Shift+5 move container to workspace number $work5
+bindsym $mod+Shift+6 move container to workspace number $work6
+bindsym $mod+Shift+7 move container to workspace number $work7
+bindsym $mod+Shift+8 move container to workspace number $work8
+bindsym $mod+Shift+9 move container to workspace number $work9
+bindsym $mod+Shift+0 move container to workspace number $work10
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
@@ -160,15 +162,13 @@ bar {
 }
 
 # Auto assign
-assign [class="^Vivaldi" window_role="app"] $work2
-assign [class="Thunderbird"] $work6
-assign [class="Caprine"] $work7
-assign [class="Meld"] $work1
-assign [class="Slack"] # Slack
+assign [class="Thunderbird"] $mail_workspace
+assign [class="Meld"] $meld_workspace
+assign [class="Slack"] $slack_workspace
 
 # spotify doesn't have class when or instance when it's launched
 # use for_window for assigning after the properties are changed.
-for_window [class="Spotify"] move to workspace # Spotify
+for_window [class="Spotify"] move to workspace $spotify_workspace
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume_up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume_down
