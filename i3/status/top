@@ -11,6 +11,7 @@ order += 'backlight'
 order += "external_script sink_name"
 order += "volume master"
 order += "tztime local"
+order += "do_not_disturb dnd"
 order += "static_string name"
 
 keyboard_layout {
@@ -72,5 +73,11 @@ external_script vagrant {
  script_path = '~/.config/i3/scripts/vagrant_status'
  format = '{output}'
  on_click 1 = 'exec --no-startup-id ~/.config/i3/scripts/toggle_vagrant'
- cache_timeout = 5
+ cache_timeout = 60
+}
+
+do_not_disturb dnd {
+  format = '{state}'
+  state_on = ''
+  state_off = ''
 }

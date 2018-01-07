@@ -52,8 +52,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
-# bindsym $mod+Shift+minus move scratchpad
-# bindsym $mod+minus scratchpad show
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
 
 # workspaces
 set $work1 1
@@ -124,13 +124,13 @@ mode "resize" {
 # Pressing up will shrink the window’s height.
 # Pressing down will grow the window’s height.
   bindsym $left       resize shrink width 10 px or 10 ppt
-    bindsym $down       resize grow height 10 px or 10 ppt
-    bindsym $up         resize shrink height 10 px or 10 ppt
-    bindsym $right      resize grow width 10 px or 10 ppt
+  bindsym $down       resize grow height 10 px or 10 ppt
+  bindsym $up         resize shrink height 10 px or 10 ppt
+  bindsym $right      resize grow width 10 px or 10 ppt
 
-# back to normal: Enter or Escape
-    bindsym Return mode "default"
+# back to normal: escape or q
     bindsym Escape mode "default"
+    bindsym q mode "default"
 }
 bindsym $mod+r mode "resize"
 
@@ -200,12 +200,19 @@ bindsym $mod+F12 exec --no-startup-id ~/.screenlayout/dual.sh
 bindsym $mod+Right workspace next_on_output
 bindsym $mod+Left workspace prev_on_output
 
-bindsym $mod+minus exec --no-startup-id fish -c 'i3-msg workspace (echo -n '' | dmenu)'
-bindsym $mod+Shift+minus exec --no-startup-id fish -c 'i3-msg move container to workspace (echo -n '' | dmenu)'
-bindsym $mod+i exec --no-startup-id fish -c 'i3-msg (echo -n '' | dmenu)'
-bindsym $mod+t exec --no-startup-id fish -c 'i3-msg title_format (echo -n '' | dmenu)'
+bindsym $mod+Shift+Right focus output right
+bindsym $mod+Shift+Left focus output left
+
+bindsym $mod+m exec --no-startup-id ~/.config/i3/scripts/create_mark
+bindsym $mod+o exec --no-startup-id ~/.config/i3/scripts/focus_on_mark
+
+
+bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/focus_on_workspace
+bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/move_to_workspace
 
 bindsym Print exec --no-startup-id gnome-screenshot --area
 
 exec --no-startup-id xautolock -time 5 -locker 'i3lock -c000000'
 exec --no-startup-id xinput --set-prop --type=int --format=8 "ELAN Touchscreen" "Device Enabled" 0
+
+for_window [title=".*cw-cli-app.*"] title_format "<span foreground='red'>%title</span>"
