@@ -1,5 +1,5 @@
 #!/bin/bash
-selected_mark=`echo -n '' | dmenu`
+selected_mark=`echo -n '' | ~/.config/i3/scripts/rofi.sh -dmenu`
 if [ "$selected_mark" == '' ]; then
   exit
 else

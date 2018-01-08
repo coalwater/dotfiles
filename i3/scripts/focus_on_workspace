@@ -1,5 +1,5 @@
 #!/bin/bash
-selected_workspace=`i3-msg -t get_workspaces | jq -r '.[] | .name' | dmenu`
+selected_workspace=`i3-msg -t get_workspaces | jq -r '.[] | .name' | ~/.config/i3/scripts/rofi.sh -dmenu`
 if [ "$selected_workspace" == '' ]; then
   exit
 else

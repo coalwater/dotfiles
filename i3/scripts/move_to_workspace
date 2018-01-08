@@ -1,6 +1,6 @@
 #!/bin/bash
 available_workspaces= `i3-msg -t get_workspaces | jq -r '.[] | .name'`
-selected_workspace=`i3-msg -t get_workspaces | jq -r '.[] | .name' | dmenu`
+selected_workspace=`i3-msg -t get_workspaces | jq -r '.[] | .name' | ~/.config/i3/scripts/rofi.sh -dmenu`
 if [[ $selected_workspace == '' ]]; then
   exit
 elif [[ $selected_workspace == '#*' ]]; then

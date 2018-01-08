@@ -22,10 +22,9 @@ focus_on_window_activation focus
 force_display_urgency_hint 1000 ms
 mouse_warping output
 
-
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id ~/.config/i3/scripts/rofi.sh -show run
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -203,8 +202,7 @@ bindsym $mod+Left workspace prev_on_output
 bindsym $mod+Shift+Right focus output right
 bindsym $mod+Shift+Left focus output left
 
-bindsym $mod+m exec --no-startup-id ~/.config/i3/scripts/create_mark
-bindsym $mod+o exec --no-startup-id ~/.config/i3/scripts/focus_on_mark
+bindsym $mod+o exec --no-startup-id ~/.config/i3/scripts/rofi.sh -show window
 
 
 bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/focus_on_workspace

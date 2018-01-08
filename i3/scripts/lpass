@@ -1,5 +1,5 @@
 #!/bin/sh
-selected_password=`lpass ls --format="%ag/%an" | dmenu -i | sed 's/^\/\(.*\)/\1/g'`
+selected_password=`lpass ls --format="%ag/%an" | ~/.config/i3/scripts/rofi.sh -dmenu | sed 's/^\/\(.*\)/\1/g'`
 if [[ $selected_password = '' ]]; then
   exit
 else
