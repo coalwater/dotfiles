@@ -1,5 +1,5 @@
 set $mod Mod4
-set $term gnome-terminal
+set $term urxvt
 set $laptop_output eDP-1
 set $external_output DP-1
 set $dual_1_output DP-1-1
