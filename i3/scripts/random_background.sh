@@ -1,3 +1,3 @@
 #!/bin/sh
-wget -O /home/mohammad/Pictures/backgrounds/current.jpg https://source.unsplash.com/featured/3200x1800
+wget -qO /home/mohammad/Pictures/backgrounds/current.jpg https://source.unsplash.com/featured/6400x3200
 feh --bg-fill /home/mohammad/Pictures/backgrounds/current.jpg
