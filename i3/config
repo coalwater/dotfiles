@@ -145,6 +145,7 @@ bindsym Mod1+Ctrl+l exec --no-startup-id i3lock -c 000000
 bindsym $mod+F4 exec --no-startup-id castnow --exit --command left
 bindsym $mod+F5 exec --no-startup-id castnow --exit --command space
 bindsym $mod+F6 exec --no-startup-id castnow --exit --command right
+bindsym $mod+F8 exec --no-startup-id ~/.config/i3/scripts/bluetooth_connect.sh
 bindsym $mod+F9 exec --no-startup-id xinput --set-prop --type=int --format=8 "Logitech M525" "libinput Natural Scrolling Enabled" 1
 bindsym $mod+F10 exec --no-startup-id touchpad-toggle.sh
 bindsym $mod+F11 exec --no-startup-id ~/.config/i3/scripts/screens_off.sh
