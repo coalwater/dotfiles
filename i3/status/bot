@@ -1,9 +1,10 @@
 general {
   colors = true
-  interval = 1
-  separator = ' | '
+  interval = 2
 }
 
+order += "external_script sink_name"
+order += "external_script vagrant"
 order += 'weather_yahoo'
 order += "pomodoro"
 order += "sysdata"
@@ -14,9 +15,8 @@ order += "ethernet eth0"
 order += "wifi"
 
 wifi {
-  cache_timeout = 1
-  format_up = '{ip} {ssid} {bitrate} {icon}'
-  on_click 1 = 'exec gnome-control-center network'
+  cache_timeout = 10
+  format = '{ip} {ssid} '
 }
 
 group disks {
@@ -37,7 +37,7 @@ group disks {
 
 online_status {
   cache_timeout = 1
-  url = 'http://yahoo.com'
+  url = 'http://google.com'
   format = '{icon}'
   icon_on = ''
   icon_off = ''
@@ -89,7 +89,7 @@ net_rate {
 weather_yahoo {
   woeid = '727232'
   forecast_days = 0
-  format_today = "{icon} {temp}°{units} {text}"
+  format_today = "{icon} {temp}° {text}"
   cache_timeout = 900
 }
 
@@ -98,4 +98,17 @@ pomodoro {
   format = '{mmss}'
   format_separator = ':'
   timer_pomodoro = 3000
+}
+
+external_script vagrant {
+ script_path = '~/.config/i3/scripts/vagrant_status'
+ format = '{output}'
+ # on_click 1 = 'exec --no-startup-id py3-cmd refresh vagrant'
+ on_click 1 = "exec --no-startup-id 'cd /home/mohammad/projects/ansible-devops && vagrant halt"
+ on_click 3 = "exec --no-startup-id 'cd /home/mohammad/projects/ansible-devops && vagrant up"
+ cache_timeout = 900
+}
+
+external_script sink_name {
+ script_path = '~/.config/i3/scripts/active_sink_name'
 }

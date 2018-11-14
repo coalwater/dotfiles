@@ -1,2 +1,7 @@
 #!/bin/bash
-echo -e 'connect XX:XX:XX:XX:XX:XX\n' | bluetoothctl
+echo 'info' | bluetoothctl | grep 'Headset'
+if [ $? -ne 0 ]; then
+  echo 'connect XX:XX:XX:XX:XX:XX' | bluetoothctl
+else
+  echo 'disconnect' | bluetoothctl
+fi

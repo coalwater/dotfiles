@@ -1,21 +1,19 @@
 general {
   colors = true
-  interval = 1
-  separator = ' |-| '
+  interval = 2
 }
 
-order += "external_script vagrant"
+order += "static_string background"
+order += "external_script mousepad"
+order += "github"
 order += 'keyboard_layout'
 order += "battery_level"
 order += 'backlight'
-order += "external_script sink_name"
 order += "volume master"
 order += "tztime local"
-order += "do_not_disturb dnd"
 order += "static_string name"
 
 keyboard_layout {
-  cache_timeout = 1
   on_click 1 = 'exec setxkbmap us'
   on_click 3 = 'exec setxkbmap ar'
 }
@@ -24,18 +22,17 @@ backlight {
   button_down = 0
   button_up = 0
   cache_timeout = 1
-  format = '{level}% '
+  format = '{level}% '
   on_click 4 = 'exec --no-startup-id light -A 1'
   on_click 5 = 'exec --no-startup-id light -U 1'
 }
 
 volume master {
   format = "%volume "
-  format_muted = "%volume "
+  format_muted = "%volume 婢"
   device = "default"
   mixer = "Master"
   mixer_idx = 0
-  on_click 1 = 'exec --no-startup-id gnome-control-center sound'
   on_click 4 = 'exec --no-startup-id ~/.config/i3/scripts/volume_up'
   on_click 5 = 'exec --no-startup-id ~/.config/i3/scripts/volume_down'
 }
@@ -65,19 +62,31 @@ static_string name {
  color = '#3e73ef'
 }
 
-external_script sink_name {
- script_path = '~/.config/i3/scripts/active_sink_name'
+github {
+  auth_token = 'xxxxxx'
+  username = 'coalwater'
+  format = ' {notifications_count}'
+  repo = 'notifications'
+  button_refresh = 1
+  button_action = 3
 }
 
-external_script vagrant {
- script_path = '~/.config/i3/scripts/vagrant_status'
- format = '{output}'
- on_click 1 = 'exec --no-startup-id ~/.config/i3/scripts/toggle_vagrant'
- cache_timeout = 60
+external_script jira {
+  cache_timeout = 60
+  format = " {output}"
+  script_path = "~/.config/i3/scripts/jira.sh"
+  on_click 1 = 'exec --no-startup-id xdg-open https://jira.xxx.net/rest/api/latest/search?jql='
+  on_click 3 = 'exec --no-startup-id xdg-open https://jira.xxx.net/secure/RapidBoard.jspa'
 }
 
-do_not_disturb dnd {
-  format = '{state}'
-  state_on = ''
-  state_off = ''
+external_script mousepad {
+  cache_timeout 60
+  format = "{output}"
+  script_path = "~/.config/i3/scripts/mousepad.sh"
+}
+
+static_string background {
+  format = 'Change background'
+  on_click 1 = 'exec --no-startup-id /home/mohammad/.config/i3/scripts/random_background.sh'
+  on_click 3 = 'exec --no-startup-id cp /home/mohammad/Pictures/backgrounds/current.jpg "/home/mohammad/Pictures/backgrounds/$(date +"%Y-%m-%d %H:%M:%S.jpg")"'
 }

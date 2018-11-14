@@ -3,5 +3,5 @@ active_sink=`~/.config/i3/scripts/active_sink`
 if [[ "$active_sink" == '' ]]; then
   exit
 else
-  pactl set-sink-volume $active_sink +2%
+  pactl set-sink-volume $active_sink +1%
 fi

@@ -8,8 +8,7 @@ set $dual_2_output DP-1-2
 set $main_output eDP-1
 set $extra_output DP-1-1
 
-font pango:Fantasque Sans Mono 10
-font pango:FontAwesome, pango:Fantasque Sans Mono
+font pango:FontAwesome, pango:Fantasque Sans Mono 15
 
 set $up k
 set $down j
@@ -21,10 +20,13 @@ focus_follows_mouse no
 focus_on_window_activation focus
 force_display_urgency_hint 1000 ms
 mouse_warping output
+workspace_auto_back_and_forth yes
+
+# default_border none
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec --no-startup-id ~/.config/i3/scripts/rofi.sh -show run
+bindsym $mod+d exec --no-startup-id ~/.config/i3/scripts/rofi.sh -p 'Run: ' -show run
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -55,64 +57,46 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
 # workspaces
-set $work1 1
-set $work2 2
-set $work3 3
-set $work4 4
-set $work5 5
-set $work6 6
-set $work7 7
-set $work8 8
-set $work9 9
-set $work10 10
-set $slack_workspace 6: slack
-set $spotify_workspace 8: spotify
-set $meld_workspace #meld
-set $mail_workspace 7: mail
-
-workspace "$work1" output $main_output
-workspace "$work2" output $main_output
-workspace "$work3" output $main_output
-workspace "$work4" output $main_output
-workspace "$work5" output $main_output
-workspace "$work6" output $main_output
-workspace "$work7" output $main_output
-workspace "$work8" output $main_output
+set $slack_workspace 6: 
+set $spotify_workspace 8: 
+set $meld_workspace # meld 
+set $mail_workspace 7: 
 
 workspace "$slack_workspace" output $main_output
 workspace "$spotify_workspace" output $main_output
-workspace "$meld_workspace" output $dual_2_output
+workspace "T1" output $dual_2_output
+workspace "$meld_workspace" output $dual_1_output
 workspace "$mail_workspace" output $main_output
 
-workspace "$work9" output $extra_output
-workspace "$work10" output $extra_output
+workspace "9" output $extra_output
+workspace "10" output $extra_output
 
-bindsym $mod+1 workspace number $work1
-bindsym $mod+2 workspace number $work2
-bindsym $mod+3 workspace number $work3
-bindsym $mod+4 workspace number $work4
-bindsym $mod+5 workspace number $work5
-bindsym $mod+6 workspace number $work6
-bindsym $mod+7 workspace number $work7
-bindsym $mod+8 workspace number $work8
-bindsym $mod+9 workspace number $work9
-bindsym $mod+0 workspace number $work10
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $work1
-bindsym $mod+Shift+2 move container to workspace number $work2
-bindsym $mod+Shift+3 move container to workspace number $work3
-bindsym $mod+Shift+4 move container to workspace number $work4
-bindsym $mod+Shift+5 move container to workspace number $work5
-bindsym $mod+Shift+6 move container to workspace number $work6
-bindsym $mod+Shift+7 move container to workspace number $work7
-bindsym $mod+Shift+8 move container to workspace number $work8
-bindsym $mod+Shift+9 move container to workspace number $work9
-bindsym $mod+Shift+0 move container to workspace number $work10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exit
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/exit.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -133,39 +117,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    id bar-top
-    output $main_output
-    status_command py3status -c ~/.config/i3/status/top
-    tray_output primary
-    position top
-    font pango:FontAwesome, pango:Fantasque Sans Mono
-    separator_symbol "    "
-}
-
-bar {
-    id bar-top-extra
-    output $dual_1_output
-    output $dual_2_output
-    tray_output none
-    position top
-    font pango:FontAwesome, pango:Fantasque Sans Mono
-}
-
-bar {
-    id bar-bot
-    output $main_output
-    status_command py3status -c ~/.config/i3/status/bot
-    tray_output none
-    position bottom
-    workspace_buttons no
-    font pango:FontAwesome, pango:Fantasque Sans Mono
-    separator_symbol "    "
-}
-
-# Auto assign
 assign [class="Thunderbird"] $mail_workspace
 assign [class="Meld"] $meld_workspace
 assign [class="Slack"] $slack_workspace
@@ -193,14 +144,18 @@ bindsym Mod1+Ctrl+l exec --no-startup-id i3lock -c 000000
 
 bindsym $mod+F9 exec --no-startup-id xinput --set-prop --type=int --format=8 "Logitech M525" "libinput Natural Scrolling Enabled" 1
 bindsym $mod+F10 exec --no-startup-id touchpad-toggle.sh
-bindsym $mod+F11 exec --no-startup-id ~/.screenlayout/off.sh
-bindsym $mod+F12 exec --no-startup-id ~/.screenlayout/dual.sh
+bindsym $mod+F11 exec --no-startup-id ~/.config/i3/scripts/screens_off.sh
+bindsym $mod+F12 exec --no-startup-id ~/.config/i3/scripts/screens_on.sh
 
 bindsym $mod+Right workspace next_on_output
 bindsym $mod+Left workspace prev_on_output
 
-bindsym $mod+Shift+Right focus output right
-bindsym $mod+Shift+Left focus output left
+bindsym $mod+Shift+Up move workspace to output up
+bindsym $mod+Shift+Right move workspace to output right
+bindsym $mod+Shift+Left move workspace to output left
+bindsym $mod+Shift+Down move workspace to output down
+
+bindsym $mod+Shift+V exec --no-startup-id $term -e /bin/sh -c 'xsel -b > /tmp/clipboard && nvim /tmp/clipboard && cat /tmp/clipboard | xsel -bi && rm /tmp/clipboard'
 
 bindsym $mod+o exec --no-startup-id ~/.config/i3/scripts/rofi.sh -show window
 
@@ -210,7 +165,9 @@ bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/move_to_workspace
 
 bindsym Print exec --no-startup-id gnome-screenshot --area
 
-exec --no-startup-id xautolock -time 5 -locker 'i3lock -c000000'
-exec --no-startup-id xinput --set-prop --type=int --format=8 "ELAN Touchscreen" "Device Enabled" 0
-
 for_window [title=".*cw-cli-app.*"] title_format "<span foreground='red'>%title</span>"
+
+exec --no-startup-id xinput --set-prop --type=int --format=8 "ELAN Touchscreen" "Device Enabled" 0
+exec --no-startup-id ~/.config/i3/scripts/xautolock.sh
+exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
+exec --no-startup-id ~/.config/i3/scripts/polybar.sh

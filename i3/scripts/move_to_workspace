@@ -1,13 +1,7 @@
 #!/bin/bash
-available_workspaces= `i3-msg -t get_workspaces | jq -r '.[] | .name'`
-selected_workspace=`i3-msg -t get_workspaces | jq -r '.[] | .name' | ~/.config/i3/scripts/rofi.sh -dmenu`
-if [[ $selected_workspace == '' ]]; then
+selected_workspace=`~/.config/i3/scripts/get_workspace_from_rofi.sh "Move to workspace"`
+if [ "$selected_workspace" == '' ]; then
   exit
-elif [[ $selected_workspace == '#*' ]]; then
-  prefix=""
-elif [[ $selected_workspace =~ ^[0-9] ]]; then
-  prefix=""
 else
-  prefix="`~/.config/i3/scripts/next_available_workspace`: "
+  i3-msg move window to workspace \""$prefix$selected_workspace"\" > /dev/null
 fi
-i3-msg move container to workspace \""$prefix$selected_workspace"\" > /dev/null
