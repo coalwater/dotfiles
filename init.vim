@@ -6,8 +6,9 @@ set backupdir=$HOME/.vim/backups,.
 set background=dark
 set showtabline=0
 set rnu
-set conceallevel=0
-set guifont=DroidSansMono\ Nerd\ Font\ 11
+set cole=0
+set lbr
+set mouse=a
 
 set shell=/bin/bash                                   " To avoid fish
 let mapleader = " "                                   " Use space as Leader
@@ -18,6 +19,8 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/vim-plug'
 Plug 'terryma/vim-multiple-cursors'                 " multiple cursor functionality, like sublime
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-rails'                              " rails navigation and functions
 Plug 'scrooloose/nerdtree'                          " a file tree
 Plug 'bling/vim-airline'                            " the nice status line below
@@ -32,27 +35,27 @@ Plug 'editorconfig/editorconfig-vim'                " support for .editorconfig 
 Plug 'Yggdroot/indentLine'                          " Show indentations easily
 Plug 'ap/vim-css-color'                             " display colors in vim
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'rking/ag.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 't9md/vim-quickhl'
 Plug 'Shougo/deoplete.nvim'
-Plug 'fishbullet/deoplete-ruby'
-Plug 'stefanoverna/vim-i18n'
+" Plug 'fishbullet/deoplete-ruby'
+" Plug 'uplus/deoplete-solargraph'
 Plug 'tpope/vim-rhubarb'
 Plug 'neomake/neomake'
 Plug 'morhetz/gruvbox'                              " color scheme
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'garbas/vim-snipmate'
 Plug 'marcweber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'honza/vim-snippets'
-Plug 'ryanss/vim-hackernews'
-Plug 'gregsexton/gitv', {'on': ['Gitv']}
 Plug 'mxw/vim-jsx'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh' }
+Plug 'tpope/vim-rails'
+Plug 'mhinz/vim-startify'
+Plug 'slim-template/vim-slim'
+Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'yaymukund/vim-rabl'
+Plug 'tomtom/tlib_vim'
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
@@ -67,12 +70,12 @@ let g:LanguageClient_serverCommands = {
 "neomake
 autocmd BufWritePost,BufEnter * Neomake
 let g:neomake_highlight_columns = 5
-let g:neomake_ruby_enabled_makers = ['rubocop', 'mri', 'reek']
+let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neomake_yaml_enabled_makers = ['yamllint']
 let g:neomake_css_enabled_makers = ['csslint']
-let g:neomake_logfile = "$HOME/.log/neomake.log"
+call neomake#configure#automake('nrwi', 200)
 let g:neomake_error_sign = {
       \ 'text': '✗',
       \ 'texthl': 'NeomakeErrorSign'
@@ -92,7 +95,12 @@ let g:neomake_info_sign = {
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 0
+call deoplete#custom#var('omni', 'input_patterns', {
+      \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
+      \ })
+call deoplete#custom#option('keyword_patterns', {
+      \ 'ruby': '[a-zA-Z_]\w*[!?]?',
+      \ })
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -102,18 +110,16 @@ nmap <F5> :source Session.vim<CR>
 
 " " airline
 let g:airline_powerline_fonts = 1
-let g:bufferline_echo = 0
+let g:bufferline_echo = 1
 let g:airline_theme = 'gruvbox'
 
-" fix powerlines
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#enabled = 1          " shows tabs
 
 "airline sections
-let g:airline_section_w = airline#section#create(['%{ObsessionStatus()}'])
+let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
+
+let g:airline_left_sep = "\uE0C6"
+let g:airline_right_sep = "\uE0C7"
 
 " FZF
 if !isdirectory(".git")
@@ -144,7 +150,6 @@ nnoremap <C-F> :NERDTreeFind<CR>                      " Ctrl+F triggers NERDTree
 " my settings "
 set backspace=2                                       " Backspace deletes like most programs in insert mode
 set ignorecase
-set smartcase
 set timeoutlen=500
 set t_Co=256
 set nu                                                " show line numbers
@@ -156,6 +161,9 @@ set list listchars=tab:»·,trail:·,nbsp:·              " Display trailing whi
 "saving files when moving away
 set autowrite                                         " Automatically :write before running commands
 au FocusLost * silent! wa
+
+" Markdown width 80
+au BufRead,BufNewFile *.md setlocal textwidth=80
 
 
 " tabs and spaces
@@ -229,6 +237,7 @@ map <C-s> :w<cr>                                " ctrl + s for saving
 " Ag search
 map <leader>s :Ag <cword>
 nmap  <silent> <leader>e :Ggrep "<cword>" <CR>
+nmap  <silent> <leader>E :Ag <cword> <CR>
 
 " more natural splitting locations
 set splitbelow
@@ -257,8 +266,8 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 " color schemes
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark = 'light'
+let g:gruvbox_italic = 1
 colorscheme gruvbox
 
 " vim-quickhl
@@ -287,6 +296,12 @@ function! Multiple_cursors_before()
     let g:deoplete#disable_auto_complete = 1
   endif
 endfunction
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<c-space>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
 
 " Called once only when the multiple selection is canceled (default <Esc>)
 function! Multiple_cursors_after()
