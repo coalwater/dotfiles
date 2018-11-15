@@ -1,0 +1,376 @@
+[colors]
+ accent = #87848f
+ bckgrd = #25151b
+ select = #32292d
+
+ background =    ${self.bckgrd}
+ background-alt =   ${self.select}
+ foreground =    ${self.accent}
+ primary =    ${self.accent}
+ alert =    #bd2c40
+ transparent =    #00000000
+
+[global/wm]
+ margin-top = 0
+ margin-bottom = 0
+
+[settings]
+ throttle-output = 5
+ throttle-output-for = 10
+ throttle-input-for = 30
+ screenchange-reload = true
+ bargapp= 2
+ barwidth = 100%
+ barheigh = 48
+
+[bar/top]
+ monitor = ${env:MONITOR}
+ monitor-strict = true
+ fixed-center = true
+ dpi = 150
+ bottom = false
+ width = ${settings.barwidth}
+ height = ${settings.barheigh}
+ offset-x = 0
+ offset-y = 0
+ background = ${colors.background}
+ foreground = ${colors.foreground}
+ overline-size = 0
+ overline-color = #f00
+ underline-size = 2
+ underline-color = #00f
+ border-top-size = ${settings.bargapp}
+ border-left-size = ${settings.bargapp}
+ border-right-size = ${settings.bargapp}
+ border-bottom-size = 0
+ border-color = ${colors.transparent}
+ radius-top = 10
+ radius-bottom = 10
+ spacing = 1
+ padding-left = 0
+ padding-right = 0
+ module-margin-left = 1
+ module-margin-right = 1
+ font-0 = FantasqueSansMono Nerd Font:pixelsize=17;1
+ tray-position = right
+ tray-padding = 2
+ separator = 
+ modules-left = i3
+ modules-right = mousepad github_notifications change_background battery screen volume date
+
+[bar/bot]
+ monitor = ${env:MONITOR}
+ monitor-strict = true
+ fixed-center = true
+ dpi = 150
+ bottom = true
+ width = ${settings.barwidth}
+ height = ${settings.barheigh}
+ offset-x = 0
+ offset-y = 0
+ background = ${colors.background}
+ foreground = ${colors.foreground}
+ overline-size = 0
+ overline-color = #f00
+ underline-size = 2
+ underline-color = #00f
+ border-top-size = ${settings.bargapp}
+ border-left-size = ${settings.bargapp}
+ border-right-size = ${settings.bargapp}
+ border-bottom-size = 0
+ border-color = ${colors.transparent}
+ radius-top = 10
+ radius-bottom = 10
+ spacing = 1
+ padding-left = 0
+ padding-right = 0
+ module-margin-left = 1
+ module-margin-right = 1
+ font-0 = FantasqueSansMono Nerd Font:pixelsize=17;1
+ separator = 
+ modules-left =
+ modules-right = sink_name vagrant filesystem cpu memory vpn wlan
+
+[bar/workspaces]
+ monitor = ${env:MONITOR}
+ monitor-strict = true
+ fixed-center = true
+ dpi = 150
+ bottom = false
+ width = ${settings.barwidth}
+ height = ${settings.barheigh}
+ offset-x = 0
+ offset-y = 0
+ background = ${colors.background}
+ foreground = ${colors.foreground}
+ overline-size = 0
+ overline-color = #f00
+ underline-size = 2
+ underline-color = #00f
+ border-top-size = ${settings.bargapp}
+ border-left-size = ${settings.bargapp}
+ border-right-size = ${settings.bargapp}
+ border-bottom-size = 0
+ border-color = ${colors.transparent}
+ radius-top = 10
+ radius-bottom = 10
+ spacing = 1
+ padding-left = 0
+ padding-right = 0
+ module-margin-left = 1
+ module-margin-right = 1
+ font-0 = FantasqueSansMono Nerd Font:pixelsize=17;1
+ separator = 
+ modules-left = i3
+
+[module/i3]
+ type = internal/i3
+ format = <label-state> <label-mode>
+ index-sort = true
+ wrapping-scroll = false
+ strip-wsnumbers = false
+ pin-workspaces = true
+ enable-scroll = false
+ label-mode-padding = 2
+ label-mode-foreground = ${colors.background}
+ label-mode-background = ${colors.alert}
+ label-focused = %name%
+ label-focused-foreground= ${colors.background}
+ label-focused-background = ${colors.primary}
+ label-focused-underline = ${colors.primary}
+ label-focused-padding = 2
+ label-unfocused = %name%
+ label-unfocused-padding = 2
+ label-unfocused-background = ${colors.background}
+ label-urgent = %name%
+ label-urgent-foreground= ${colors.alert}
+ label-urgent-background = ${colors.background-alt}
+ label-urgent-padding = 2
+ label-visible = %name%
+ label-visible-background = ${colors.background-alt}
+ label-visible-padding = ${self.label-focused-padding}
+
+[module/cpu]
+ format-label = internal/cpu
+ format = <label>
+ type = internal/cpu
+ interval = 2
+ label = " %percentage%%"
+ format-foreground = ${colors.primary}
+
+[module/memory]
+ type = internal/memory
+ interval = 2
+ label = " %percentage_used%%"
+ format-foreground = ${colors.primary}
+
+[module/alsa]
+  type = internal/alsa
+
+  ; Soundcard to be used
+  ; Usually in the format hw:# where # is the card number
+  ; You can find the different card numbers in `/proc/asound/cards`
+  master-soundcard = hw:0
+  speaker-soundcard = hw:0
+
+  ; Name of the master, speaker and headphone mixers
+  ; Use the following command to list available mixer controls:
+  ; $ amixer scontrols | sed -nr "s/.*'([[:alnum:]]+)'.*/\1/p"
+  ; If master, speaker or headphone-soundcard isn't the default,
+  ; use `amixer -c # scontrols` instead where # is the number
+  ; of the master, speaker or headphone soundcard respectively
+  ;
+  ; Default: Master
+  master-mixer = Master
+
+  ; Optionally define speaker and headphone mixers
+  ; Default: none
+  speaker-mixer = Speaker
+  ; Default: none
+
+  ; NOTE: This is required if headphone_mixer is defined
+  ; Use the following command to list available device controls
+  ; $ amixer controls | sed -r "/CARD/\!d; s/.*=([0-9]+).*name='([^']+)'.*/printf '%3.0f: %s\n' '\1' '\2'/e" | sort
+  ; You may also need to use `amixer -c # controls` as above for the mixer names
+  ; Default: none
+
+  ; Use volume mapping (similar to amixer -M and alsamixer), where the increase in volume is linear to the ear
+  ; Default: false
+  mapped = true
+
+  ; Interval for volume increase/decrease (in percent points) (unreleased)
+  ; Default: 5
+  interval = 5
+
+
+
+
+[module/temperature]
+ type = internal/temperature
+ warn-temperature = 65
+
+ format = <label>
+ format-warn = <label-warn>
+
+ label = %temperature%
+ label-warn = %temperature%!!!
+
+[module/cputemp]
+ type = custom/script
+ exec = sensors | grep --max-count=1 "CPU Temperature:" | awk '{print substr($0,22,2)}'
+ interval = 10
+ label = " %output%°C"
+ format-foreground = ${colors.primary}
+
+[module/gputemp]
+ type = custom/script
+ exec = nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits
+ interval = 10
+ label = "GPU %output%°C"
+ format-foreground = ${colors.primary}
+
+
+
+[module/date]
+ type = internal/date
+ interval = 1.0
+ date = %a %Y-%m-%d
+ time = %H:%M:%S
+ label = %date% %time%
+ format = <label>
+ format-foreground = ${colors.primary}
+
+[module/aabacklight]
+ card = intel_backlight
+ type = internal/backlight
+ format = <label>
+ label =  %percentage%%
+ scroll-up = light -A 5
+ scroll-down = light -U 5
+
+[module/screen]
+  type = custom/script
+  exec = light -G
+  scroll-up = light -A 5
+  scroll-down = light -U 5
+  interval = 5
+  format = <label>
+  label =  %output%%
+
+
+[module/battery]
+ type = internal/battery
+ battery = BAT0
+ adapter = AC
+ full-at = 99
+ time-format = %H:%M
+ label-discharging = %percentage%% %time%
+ label-charging = %percentage%% %time%
+ format-charging = <animation-charging> <label-charging>
+ format-charging-foreground = ${colors.primary}
+ label-charging-foreground = ${colors.primary}
+ format-discharging = <ramp-capacity> <label-discharging>
+ format-discharging-foreground = ${colors.primary}
+ label-discharging-foreground = ${colors.primary}
+ format-full-prefix = " "
+ format-full-prefix-foreground = ${colors.primary}
+ label-full-foreground = ${colors.primary}
+ ramp-capacity-0 = 
+ ramp-capacity-1 = 
+ ramp-capacity-2 = 
+ ramp-capacity-3 = 
+ ramp-capacity-4 = 
+ ramp-capacity-foreground = ${colors.primary}
+ animation-charging-0 = 
+ animation-charging-1 = 
+ animation-charging-2 = 
+ animation-charging-3 = 
+ animation-charging-4 = 
+ animation-charging-foreground = ${colors.primary}
+ animation-charging-framerate = 750
+
+[module/username]
+  type = custom/text
+  content = Mohammad AbuShady 
+  content-padding = 1
+
+[module/change_background]
+  type = custom/text
+  format = <label>
+  content = 
+  click-left = /home/mohammad/.config/i3/scripts/random_background.sh
+  click-right = /home/mohammad/.config/i3/scripts/random_background.sh save
+
+[module/volume]
+  type = internal/pulseaudio
+  use-ui-max = true
+  format-volume = <ramp-volume><label-volume>
+  ramp-volume-0 = 
+  ramp-volume-1 = 
+  ramp-volume-2 = 
+  label-muted = 婢 %percentage%%
+
+[module/github_notifications]
+  type = internal/github
+  token = ${file:/home/mohammad/nextcloud-data/keys/github.token}
+  empty-notifications = true
+  interval = 60
+  label =  %notifications%
+  click-right = exec xdg-open https://github.com/notifications > /dev/null 2>&1 &
+
+[module/mousepad]
+  type = custom/script
+  exec = /home/mohammad/.config/i3/scripts/mousepad.sh
+
+[module/wifi]
+type = internal/network
+interface =
+label-connected = %upspeed:10% %downspeed:9% %local_ip% %essid%
+
+[module/wlan]
+ type = internal/network
+ interface = wlp58s0
+ interval = 3.0
+ format-connected = <label-connected>
+ format-connected-suffix = " "
+label-connected = %upspeed:5:5%   %downspeed:5:5%   %local_ip%  %essid%
+ label-disconnected = "disconnected "
+ label-disconnected-foreground = #5b
+ ramp-signal-foreground = ${colors.foreground}
+ format-connected-foreground = ${colors.primary}
+
+[module/filesystem]
+ type = internal/fs
+ ; Mountpoints to display
+ mount-0 = /
+ mount-1 = /home
+
+ ; Seconds to sleep between updates
+ ; Default: 30
+ interval = 10
+
+ ; Display fixed precision values
+ ; Default: false
+ fixed-values = true
+
+ ; Spacing between entries
+ ; Default: 2
+ spacing = 4
+
+[module/sink_name]
+ type = custom/script
+  exec = /home/mohammad/.config/i3/scripts/active_sink_name
+  interval = 15
+  format = <label>
+  label = %output%
+
+[module/vagrant]
+ type = custom/script
+  exec = /home/mohammad/.config/i3/scripts/vagrant_status
+  interval = 60
+  format = <label>
+  label = %output%
+[module/vpn]
+  type = custom/script
+  exec = /home/mohammad/.config/i3/scripts/vpn_status.sh
+  interval = 5
