@@ -22,3 +22,15 @@
   verbose = true
 [rebase]
   autostash = true
+  autosquash = true
+  missingCommitsCheck = warn
+[grep]
+  lineNumber = true
+[pull]
+  rebase = true
+[alias]
+  ff = merge --ff-only
+  f = fetch -p
+  amn = commit --amend --no-edit
+  pf = push origin HEAD --force-with-lease
+  fixup = commit --fixup
