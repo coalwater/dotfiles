@@ -1,25 +1,24 @@
 [user]
-	name = Mohammad AbuShady
-	email = mohammad@abushady.com
+  name = Mohammad AbuShady
+  email = mohammad@abushady.com
 [merge]
-	tool = meld
+  tool = meld
 [diff]
-	tool = meld
+  tool = meld
 [core]
-	excludesfile = /home/mohammad/.gitignore
-	editor = nvim
+  excludesfile = ~/.config/git/ignore
+  editor = nvim
 [push]
-	default = simple
+  default = simple
 [rerere]
-	enabled = false
+  enabled = false
 [github]
-	user = coalwater
+  user = coalwater
 [help]
-	autocorrect = -1
+  autocorrect = -1
 [log]
-	decorate = auto
+  decorate = auto
 [commit]
   verbose = true
-  gpgsign = true
 [rebase]
   autostash = true
