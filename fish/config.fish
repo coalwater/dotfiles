@@ -20,10 +20,6 @@ fundle init
 
 alias oneline "xsel -b -o | tr -d '\n' | tr -s ' ' | xsel -b -i"
 
-
-
-
-
 #Abbreviations
 
 abbr checkout 'git checkout'
@@ -49,4 +45,8 @@ abbr ghost 'nvim +GhostStart'
 
 if test (tty) = "/dev/tty1"
   startx
+end
+
+function fish_greeting
+  neofetch
 end
