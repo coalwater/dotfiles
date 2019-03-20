@@ -1,3 +1,17 @@
 #!/bin/bash
 active_sink=`~/.config/i3/scripts/active_sink`
-pactl list sinks short | grep "^$active_sink" | sed 's/\s\+/ /g' | cut -d' ' -f 2 | cut -d'.' -f 1 | tr '_' ' '
+sink_name=`pactl list sinks short | grep "^$active_sink" | sed 's/\s\+/ /g' | cut -d' ' -f 2 | cut -d'.' -f 1 | tr '_' ' '`
+
+if [[ "$sink_name" == 'alsa output' ]]; then
+  echo '蓼 speaker'
+  echo '#CDBB79'
+  exit 0
+fi
+
+if [[ "$sink_name" == 'bluez sink' ]]; then
+  echo ' bluetooth'
+  echo '#1F84CE'
+  exit 0
+fi
+
+$sink_name
