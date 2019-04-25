@@ -3,9 +3,10 @@ general {
   interval = 2
 }
 
+order += "external_script mobile_minutes"
+order += "external_script github_notifications"
 order += "static_string background"
 order += "external_script mousepad"
-order += "github"
 order += 'keyboard_layout'
 order += "battery_level"
 order += 'backlight'
@@ -22,14 +23,14 @@ backlight {
   button_down = 0
   button_up = 0
   cache_timeout = 1
-  format = '{level}% '
+  format = ' {level}%'
   on_click 4 = 'exec --no-startup-id light -A 1'
   on_click 5 = 'exec --no-startup-id light -U 1'
 }
 
 volume master {
-  format = "%volume "
-  format_muted = "%volume 婢"
+  format = " %volume"
+  format_muted = "婢 %volume"
   device = "default"
   mixer = "Master"
   mixer_idx = 0
@@ -54,39 +55,41 @@ battery_level {
   color_good = '#00FF00'
   color_degraded = '#FFFF00'
   color_bad = '#FF0000'
-  measurement_mode = 'acpi'
+  measurement_mode = 'sys'
 }
 
 static_string name {
  format = "Mohammad AbuShady"
- color = '#3e73ef'
 }
 
-github {
-  auth_token = 'xxxxxx'
-  username = 'coalwater'
-  format = ' {notifications_count}'
-  repo = 'notifications'
-  button_refresh = 1
-  button_action = 3
-}
-
-external_script jira {
+external_script github_notifications {
   cache_timeout = 60
+  script_path = "~/.config/i3/scripts/github_notifications.sh"
+  on_click 3 = 'exec --no-startup-id xdg-open https://github.com/notifications'
+}
+
+external_script github_j {
+  cache_timeout = 900
   format = " {output}"
-  script_path = "~/.config/i3/scripts/jira.sh"
-  on_click 1 = 'exec --no-startup-id xdg-open https://jira.xxx.net/rest/api/latest/search?jql='
-  on_click 3 = 'exec --no-startup-id xdg-open https://jira.xxx.net/secure/RapidBoard.jspa'
+  script_path = "~/.config/i3/scripts/github_jobs.sh"
+  on_click 3 = 'exec --no-startup-id xdg-open https://github.com/about/careers'
+}
+
+external_script mobile_minutes {
+  cache_timeout = 86400
+  format = "{output}"
+  script_path = "~/.config/i3/scripts/mobile_minutes"
 }
 
 external_script mousepad {
-  cache_timeout 60
+  cache_timeout = 60
   format = "{output}"
   script_path = "~/.config/i3/scripts/mousepad.sh"
 }
 
 static_string background {
-  format = 'Change background'
+  format = ''
+  color = '#F38630'
   on_click 1 = 'exec --no-startup-id /home/mohammad/.config/i3/scripts/random_background.sh'
   on_click 3 = 'exec --no-startup-id cp /home/mohammad/Pictures/backgrounds/current.jpg "/home/mohammad/Pictures/backgrounds/$(date +"%Y-%m-%d %H:%M:%S.jpg")"'
 }

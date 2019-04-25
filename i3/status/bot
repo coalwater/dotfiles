@@ -4,32 +4,32 @@ general {
 }
 
 order += "external_script sink_name"
-order += "external_script vagrant"
-order += 'weather_yahoo'
-order += "pomodoro"
+order += "external_script gcp"
 order += "sysdata"
 order += "group disks"
 order += "net_rate"
+order += "external_script ip"
+order += "external_script vpn"
 order += "online_status"
 order += "ethernet eth0"
 order += "wifi"
 
 wifi {
   cache_timeout = 10
-  format = '{ip} {ssid} '
+  format = ' {ip} {ssid}'
 }
 
 group disks {
   cycle = 10
   click_mode = "button"
-  format = "{output} {button}"
+  format = "[\?min_length=30 {output} {button}]"
 
-  diskdata "/" {
+  diskdata "/home" {
     disk = "nvme0n1p7"
     format = ' /home {used_percent}% ({total})'
   }
 
-  diskdata "/home" {
+  diskdata "/" {
     disk = "nvme0n1p5"
     format = ' / {used_percent}% ({total})'
   }
@@ -39,8 +39,8 @@ online_status {
   cache_timeout = 1
   url = 'http://google.com'
   format = '{icon}'
-  icon_on = ''
-  icon_off = ''
+  icon_on = ''
+  icon_off = ''
 
 }
 
@@ -53,7 +53,7 @@ ethernet eth0 {
 sysdata {
   cache_timeout = 1
   on_click 1 = 'exec gnome-system-monitor'
-  format = "[\?color=cpu  {cpu_usage}%]   [\?color=mem 🖫 {mem_used_percent}%]"
+  format = "[\?color=cpu  {cpu_usage}%]  [\?color=mem 🖫 {mem_used_percent}%]"
   thresholds = {
     'cpu': [
       (0, 'good'),
@@ -71,7 +71,8 @@ sysdata {
 net_rate {
   cache_timeout = 1
   unit = 'kB/s'
-  format = "[\?color=up {up}]   [\?color=down {down}]"
+  format = "[\?color=up  {up}]  [\?color=down {down}]"
+  format_value = "[\?min_length=9 {value:.0f}{unit}]"
   thresholds = {
     'up': [
       (0, 'good'),
@@ -106,9 +107,24 @@ external_script vagrant {
  # on_click 1 = 'exec --no-startup-id py3-cmd refresh vagrant'
  on_click 1 = "exec --no-startup-id 'cd /home/mohammad/projects/ansible-devops && vagrant halt"
  on_click 3 = "exec --no-startup-id 'cd /home/mohammad/projects/ansible-devops && vagrant up"
- cache_timeout = 900
+ cache_timeout = 60
 }
 
 external_script sink_name {
  script_path = '~/.config/i3/scripts/active_sink_name'
+}
+
+external_script vpn {
+ script_path = '~/.config/i3/scripts/vpn_status.sh'
+ cache_timeout = 10
+}
+
+external_script ip {
+  script_path = '~/.config/i3/scripts/ip'
+  cache_timeout = 10
+}
+
+external_script gcp {
+  script_path = '~/.config/i3/scripts/gcp_status.sh'
+  cache_timeout = 60
 }

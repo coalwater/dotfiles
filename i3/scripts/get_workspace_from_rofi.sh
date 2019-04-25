@@ -12,5 +12,8 @@ selected_workspace="${selected_workspace/apple/}"
 selected_workspace="${selected_workspace/whatsapp/}"
 selected_workspace="${selected_workspace/rocket/異}"
 selected_workspace="${selected_workspace/gentoo/}"
+selected_workspace="${selected_workspace/analytics/}"
+selected_workspace="${selected_workspace/env/}"
+selected_workspace="${selected_workspace/markdown/}"
 
 echo -n $selected_workspace

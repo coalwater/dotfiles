@@ -1,0 +1,12 @@
+#!/bin/sh
+window_name=`~/.bin/i3-get-windows | jq ".[] | select(.focused == true) | .name"`
+`notify_send $window_name`
+echo $window_name >> /tmp/names
+if [[ $window_name =~ ^\"nvim* ]]; then
+  echo 'nvim' >> /tmp/names
+  `~/.local/bin/i3-vim-focus $2`
+else
+  echo 'normal' >> /tmp/names
+  i3-msg focus "$2"
+fi
+

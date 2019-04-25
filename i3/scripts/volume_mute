@@ -1,0 +1,7 @@
+#!/bin/bash
+active_sink=`~/.config/i3/scripts/active_sink`
+if [[ "$active_sink" == '' ]]; then
+  exit
+else
+  pactl set-sink-mute $active_sink toggle
+fi

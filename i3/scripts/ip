@@ -1,0 +1,15 @@
+#!/bin/sh
+string=`curl -s --connect-timeout 1 -m 2 https://ifconfig.co/json | jq '.ip + ", " + .country_iso' | sed 's/"//g'`
+
+if [ "$string" == "" ]; then
+  string='Disconnected'
+  echo $string
+  echo '#00ff00'
+fi
+if [[ $string == *", NL" ]]; then
+  echo $string
+  echo '#ff0000'
+else
+  echo $string
+  echo '#00ff00'
+fi

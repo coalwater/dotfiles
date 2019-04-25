@@ -1,14 +1,11 @@
 set $mod Mod4
 set $term urxvt
-set $laptop_output eDP-1
+set $main_output eDP-1
 set $external_output DP-1
 set $dual_1_output DP-1-1
 set $dual_2_output DP-1-2
 
-set $main_output eDP-1
-set $extra_output DP-1-1
-
-font pango:FontAwesome, pango:Fantasque Sans Mono 15
+font pango:FantasqueSansMono Nerd Font 16
 
 set $up k
 set $down j
@@ -57,19 +54,14 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
 # workspaces
-set $slack_workspace 6: 
-set $spotify_workspace 8: 
-set $meld_workspace # meld 
-set $mail_workspace 7: 
+set $slack_workspace 6 
+set $spotify_workspace 8 
+set $meld_workspace 100 
+set $mail_workspace 7 
 
-workspace "$slack_workspace" output $main_output
 workspace "$spotify_workspace" output $main_output
-workspace "T1" output $dual_2_output
 workspace "$meld_workspace" output $dual_1_output
 workspace "$mail_workspace" output $main_output
-
-workspace "9" output $extra_output
-workspace "10" output $extra_output
 
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -106,10 +98,10 @@ mode "resize" {
 # Pressing right will grow the window’s width.
 # Pressing up will shrink the window’s height.
 # Pressing down will grow the window’s height.
-  bindsym $left       resize shrink width 10 px or 10 ppt
-  bindsym $down       resize grow height 10 px or 10 ppt
-  bindsym $up         resize shrink height 10 px or 10 ppt
-  bindsym $right      resize grow width 10 px or 10 ppt
+  bindsym $left       resize shrink width 5 px or 5 ppt
+  bindsym $down       resize grow height 5 px or 5 ppt
+  bindsym $up         resize shrink height 5 px or 5 ppt
+  bindsym $right      resize grow width 5 px or 5 ppt
 
 # back to normal: escape or q
     bindsym Escape mode "default"
@@ -127,7 +119,7 @@ for_window [class="Spotify"] move to workspace $spotify_workspace
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume_up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume_down
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/scripts/volume_mute
 
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
@@ -140,7 +132,7 @@ bindsym XF86PowerOff exec --no-startup-id systemctl suspend
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
 
-bindsym Mod1+Ctrl+l exec --no-startup-id i3lock -c 000000
+bindsym Mod1+Ctrl+l exec --no-startup-id xautolock -locknow
 
 bindsym $mod+F4 exec --no-startup-id castnow --exit --command left
 bindsym $mod+F5 exec --no-startup-id castnow --exit --command space
@@ -176,3 +168,47 @@ exec --no-startup-id xinput --set-prop --type=int --format=8 "ELAN Touchscreen" 
 exec --no-startup-id ~/.config/i3/scripts/xautolock.sh
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id ~/.config/i3/scripts/polybar.sh
+
+bar {
+    id bar-top
+    output $main_output
+    output $dual_1_output
+    status_command py3status -c ~/.config/i3/status/top
+    tray_output primary
+    position top
+    separator_symbol ""
+    colors {
+      background #25151b
+      statusline #87848f
+      focused_workspace  #25151b #87848f #25151b
+      inactive_workspace  #25151b #25151b #87848f
+    }
+}
+
+bar {
+    id bar-extra-top
+    output $dual_2_output
+    tray_output off
+    position top
+    separator_symbol ""
+    colors {
+      background #25151b
+      statusline #87848f
+      focused_workspace  #25151b #87848f #25151b
+      inactive_workspace  #25151b #25151b #87848f
+    }
+}
+
+bar {
+    id bar-bottom
+    output $main_output
+    status_command py3status -c ~/.config/i3/status/bot
+    tray_output off
+    position bottom
+    separator_symbol ""
+    workspace_buttons no
+    colors {
+      background #25151b
+      statusline #87848f
+    }
+}
