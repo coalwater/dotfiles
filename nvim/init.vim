@@ -291,6 +291,9 @@ let g:tagbar_show_visibility = 1
 command F :let @+=expand("%")
 command Rip :NeomakeSh fish -c 'ripper-tags -R --exclude=vendor'
 
+command -range=% StringifyHash <line1>,<line2>s/\(\w\+\):/'\1' =>/g
+command -range=% SymbolizeHash <line1>,<line2>s/'\([^']*\)'\s*=>/\1:\2/g
+
 function! Multiple_cursors_before()
   if exists('g:deoplete#disable_auto_complete')
     let g:deoplete#disable_auto_complete = 1
