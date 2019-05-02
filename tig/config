@@ -1,3 +1,3 @@
-bind generic 7 !@sh -c "echo -n %(commit) | xsel -ib"
-bind generic 8 !@sh -c "echo -n %(file) | xsel -ib"
-bind generic 9 !@sh -c "echo -n %(lineno) | xsel -ib"
+bind generic C !@sh -c "echo -n %(commit) | xsel -ib"
+bind generic F !@sh -c "echo -n %(file) | xsel -ib"
+bind generic L !@sh -c "echo -n %(lineno) | xsel -ib"
