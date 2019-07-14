@@ -5,12 +5,15 @@ set backup
 set backupdir=$HOME/.vim/backups,.
 set background=dark
 set showtabline=0
-set rnu
+set wildmenu
+set wildmode=longest:full,full
+
+" set rnu
 set cole=0
 set lbr
 set mouse=a
 
-set shell=/bin/bash                                   " To avoid fish
+set shell=/usr/bin/fish                               " To avoid fish
 let mapleader = " "                                   " Use space as Leader
 
 "" Vundle
@@ -24,6 +27,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-rails'                              " rails navigation and functions
 Plug 'scrooloose/nerdtree'                          " a file tree
 Plug 'bling/vim-airline'                            " the nice status line below
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'                           " Git commands
 Plug 'airblade/vim-gitgutter'                       " Git gutter
 Plug 'tpope/vim-surround'                           " Useful surround functions
@@ -38,8 +42,10 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 't9md/vim-quickhl'
 Plug 'Shougo/deoplete.nvim'
-" Plug 'fishbullet/deoplete-ruby'
-" Plug 'uplus/deoplete-solargraph'
+Plug 'uplus/deoplete-solargraph'
+Plug 'deoplete-plugins/deoplete-go'
+Plug 'leafgarland/typescript-vim'
+Plug 'stamblerre/gocode'
 Plug 'tpope/vim-rhubarb'
 Plug 'neomake/neomake'
 Plug 'morhetz/gruvbox'                              " color scheme
@@ -63,10 +69,6 @@ call plug#end()
 set maxmempattern=200000
 set cursorline
 
-let g:LanguageClient_serverCommands = {
-    \ 'ruby': ['tcp://127.0.0.1:7658'],
-    \ }
-
 "neomake
 autocmd BufWritePost,BufEnter * Neomake
 let g:neomake_highlight_columns = 5
@@ -75,13 +77,20 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neomake_yaml_enabled_makers = ['yamllint']
 let g:neomake_css_enabled_makers = ['csslint']
-call neomake#configure#automake('nrwi', 200)
+"let g:neomake_go_enabled_makers = ['go', 'govet']
+"call neomake#configure#automake('nrw', 200)
+call neomake#configure#automake({
+      \ 'TextChanged': {},
+      \ 'InsertLeave': {},
+      \ 'BufWritePost': {'delay': 0},
+      \ 'BufWinEnter': {},
+      \ }, 200)
 let g:neomake_error_sign = {
-      \ 'text': '✗',
+      \ 'text': '',
       \ 'texthl': 'NeomakeErrorSign'
       \ }
 let g:neomake_warning_sign = {
-      \ 'text': '⚠',
+      \ 'text': '',
       \ 'texthl': 'NeomakeWarningSign',
       \ }
 let g:neomake_message_sign = {
@@ -89,18 +98,14 @@ let g:neomake_message_sign = {
       \ 'texthl': 'NeomakeMessageSign',
       \ }
 let g:neomake_info_sign = {
-      \ 'text': 'ℹ',
+      \ 'text': '',
       \ 'texthl': 'NeomakeInfoSign'
       \ }
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
-      \ })
-call deoplete#custom#option('keyword_patterns', {
-      \ 'ruby': '[a-zA-Z_]\w*[!?]?',
-      \ })
+call deoplete#custom#option('deoplete-options-auto_complete_delay', 1000)
+
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -111,15 +116,17 @@ nmap <F5> :source Session.vim<CR>
 " " airline
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 1
-let g:airline_theme = 'gruvbox'
+let g:airline_theme = 'deus'
 
 let g:airline#extensions#tabline#enabled = 1          " shows tabs
 
-"airline sections
-let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'', '''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
-
-let g:airline_left_sep = "\uE0C6"
-let g:airline_right_sep = "\uE0C7"
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_skip_empty_sections = 1
+let g:airline_symbols.linenr = ''
+let g:airline_left_sep = "" "\uE0C6
+let g:airline_right_sep = "" "\uE0C7
 
 " FZF
 if !isdirectory(".git")
@@ -185,6 +192,7 @@ nnoremap <leader>w :BD<CR>
 nnoremap <leader>q :%bd<CR>
 " space + space + q closes all
 nnoremap <leader><leader>q :qa<CR>
+nnoremap <leader>h :History<CR>
 
 " Silly typos that i hate
 command WQ wq
@@ -197,6 +205,9 @@ nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>          " Leader + Right sho
 nnoremap <M-j> :GitGutterNextHunk<CR>                    " Alt + Down shows next hunk
 nnoremap <M-k> :GitGutterPrevHunk<CR>                      " Alt + Up shows previous hunk
 nnoremap <Leader><Leader><Left> :GitGutterUndoHunk<CR>    " Leader + Leader + left reverts hunk
+
+nnoremap <M-J> :NeomakeNextLoclist<CR> " jump to next error
+nnoremap <M-K> :NeomakePrevLoclist<CR> " jump to previous error
 
 " alt + direction for buffer swapping
 noremap <M-h> :bp<cr>
@@ -234,10 +245,14 @@ map <C-l> <C-W>l
 
 map <C-s> :w<cr>                                " ctrl + s for saving
 
+" exit terminal
+tnoremap <S-Esc> <C-\><C-n>
+
 " Ag search
-map <leader>s :Ag <cword>
-nmap  <silent> <leader>e :Ggrep "<cword>" <CR>
-nmap  <silent> <leader>E :Ag <cword> <CR>
+nmap  <silent><leader>e :call fzf#vim#ag(expand('<cword>'))<CR>
+nmap  <silent><leader>E :call fzf#vim#ag(expand('<cWORD>'))<CR>
+
+command! Agword call fzf#vim#ag('<cword>')
 
 " more natural splitting locations
 set splitbelow
@@ -271,9 +286,9 @@ let g:gruvbox_italic = 1
 colorscheme gruvbox
 
 " vim-quickhl
-nmap <Space>m <Plug>(quickhl-manual-this)
-vmap <Space>m <Plug>(quickhl-manual-this)
-nmap <Space>M <Plug>(quickhl-manual-reset)
+nmap <Leader>m <Plug>(quickhl-manual-this)
+vmap <Leader>m <Plug>(quickhl-manual-this)
+nmap <Leader>M <Plug>(quickhl-manual-reset)
 
 nnoremap <M-F> gg=G``
 set colorcolumn=81,121
@@ -289,16 +304,11 @@ autocmd QuickFixCmdPost *grep* cwindow
 let g:tagbar_show_visibility = 1
 
 command F :let @+=expand("%")
-command Rip :NeomakeSh fish -c 'ripper-tags -R --exclude=vendor'
-
+command GenerateRipperTags :NeomakeSh fish -c "ripper-tags -R --exclude='public' ."
 command -range=% StringifyHash <line1>,<line2>s/\(\w\+\):/'\1' =>/g
 command -range=% SymbolizeHash <line1>,<line2>s/'\([^']*\)'\s*=>/\1:\2/g
+map <M-r> :GenerateRipperTags<cr>
 
-function! Multiple_cursors_before()
-  if exists('g:deoplete#disable_auto_complete')
-    let g:deoplete#disable_auto_complete = 1
-  endif
-endfunction
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<c-space>"
@@ -306,9 +316,16 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists('g:deoplete#disable_auto_complete')
-    let g:deoplete#disable_auto_complete = 0
+func! Multiple_cursors_before()
+  if deoplete#is_enabled()
+    call deoplete#disable()
+    let g:deoplete_is_enable_before_multi_cursors = 1
+  else
+    let g:deoplete_is_enable_before_multi_cursors = 0
   endif
-endfunction
+endfunc
+func! Multiple_cursors_after()
+  if g:deoplete_is_enable_before_multi_cursors
+    call deoplete#enable()
+  endif
+endfunc

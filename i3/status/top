@@ -68,13 +68,6 @@ external_script github_notifications {
   on_click 3 = 'exec --no-startup-id xdg-open https://github.com/notifications'
 }
 
-external_script github_j {
-  cache_timeout = 900
-  format = " {output}"
-  script_path = "~/.config/i3/scripts/github_jobs.sh"
-  on_click 3 = 'exec --no-startup-id xdg-open https://github.com/about/careers'
-}
-
 external_script mobile_minutes {
   cache_timeout = 86400
   format = "{output}"

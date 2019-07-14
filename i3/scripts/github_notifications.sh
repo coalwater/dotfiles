@@ -2,7 +2,8 @@
 token=`cat ~/nextcloud-data/keys/github.token`
 json=`curl -su coalwater:$token https://api.github.com/notifications`
 reviews=`echo $json | jq '.[] | select(.reason == "review_requested") | .id' | wc -l`
-notifications=`echo $json | jq 'length'`
+total_notifications=`echo $json | jq 'length'`
+notifications=`echo $total_notifications - $reviews | bc`
 
 
 echo " $reviews/$notifications"
