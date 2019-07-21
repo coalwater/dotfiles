@@ -229,11 +229,11 @@ let g:mundo_width = 30
 let g:mundo_preview_height = 40
 
 set undofile                                       "  Save undo's after file closes
-set undodir=$HOME/.vim/undo,.                      "  where to save undo histories
+set undodir=$HOME/.local/nvim/undo,.              "  where to save undo histories
+set directory=$HOME/.local/nvim/swap,.
 set undolevels=1000                                "  How many undos
 set undoreload=10000                               "  number of lines to save for undo
 
-set directory=$HOME/.vim/swap,.
 
 " highlighting indentation settings
 let g:indentLine_char = '│'
