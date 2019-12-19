@@ -18,6 +18,10 @@ fundle plugin 'tuvistavie/fish-ssh-agent'
 # fundle plugin 'oh-my-fish/plugin-chruby'
 fundle init
 
+function fish_greeting
+  neofetch
+end
+
 alias oneline "xsel -b -o | tr -d '\n' | tr -s ' ' | xsel -b -i"
 
 #Abbreviations
