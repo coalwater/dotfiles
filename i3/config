@@ -170,32 +170,40 @@ exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id ~/.config/i3/scripts/polybar.sh
 
 bar {
-    id bar-top
+    id bar-extra-top
     output $main_output
     output $dual_1_output
-    status_command py3status -c ~/.config/i3/status/top
-    tray_output primary
-    position top
-    separator_symbol ""
-    colors {
-      background #25151b
-      statusline #87848f
-      focused_workspace  #25151b #87848f #25151b
-      inactive_workspace  #25151b #25151b #87848f
-    }
-}
-
-bar {
-    id bar-extra-top
     output $dual_2_output
     tray_output off
     position top
     separator_symbol ""
     colors {
-      background #25151b
-      statusline #87848f
-      focused_workspace  #25151b #87848f #25151b
-      inactive_workspace  #25151b #25151b #87848f
+      background #3c3836
+      statusline #ebdbb2
+      separator  #666666
+      focused_workspace  #458588 #458588 #ebdbb2
+      active_workspace   #83a598 #83a598 #ebdbb2
+      inactive_workspace #504945 #504945 #ebdbb2
+      urgent_workspace   #cc241d #cc241d #504945
+    }
+}
+
+bar {
+    id bar-top
+    output $main_output
+    status_command py3status -c ~/.config/i3/status/top
+    tray_output primary
+    position top
+    separator_symbol ""
+    workspace_buttons no
+    colors {
+      background #3c3836
+      statusline #ebdbb2
+      separator  #666666
+      focused_workspace  #458588 #458588 #ebdbb2
+      active_workspace   #83a598 #83a598 #ebdbb2
+      inactive_workspace #504945 #504945 #ebdbb2
+      urgent_workspace   #cc241d #cc241d #504945
     }
 }
 
@@ -208,7 +216,12 @@ bar {
     separator_symbol ""
     workspace_buttons no
     colors {
-      background #25151b
-      statusline #87848f
+      background #3c3836
+      statusline #ebdbb2
+      separator  #666666
+      focused_workspace  #458588 #458588 #ebdbb2
+      active_workspace   #83a598 #83a598 #ebdbb2
+      inactive_workspace #504945 #504945 #ebdbb2
+      urgent_workspace   #cc241d #cc241d #504945
     }
 }
