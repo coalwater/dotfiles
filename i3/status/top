@@ -3,11 +3,10 @@ general {
   interval = 2
 }
 
-order += "external_script mobile_minutes"
+order += "external_script kimai"
 order += "external_script github_notifications"
 order += "static_string background"
 order += "external_script mousepad"
-order += 'keyboard_layout'
 order += "battery_level"
 order += 'backlight'
 order += "volume master"
@@ -72,6 +71,15 @@ external_script mobile_minutes {
   cache_timeout = 86400
   format = "{output}"
   script_path = "~/.config/i3/scripts/mobile_minutes"
+  on_click 1 = "exec py3-cmd refresh 'external_script mobile_minutes'"
+}
+
+external_script kimai {
+  cache_timeout = 60
+  format = "{output}"
+  script_path = "~/.config/i3/scripts/kimai.sh"
+  on_click 1 = "exec py3-cmd refresh 'external_script kimai'"
+  on_click 3 = "exec xdg-open https://kimai.abushady.com/en/timesheet/"
 }
 
 external_script mousepad {

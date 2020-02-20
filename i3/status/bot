@@ -4,8 +4,8 @@ general {
 }
 
 order += "external_script sink_name"
-order += "external_script gcp"
 order += "sysdata"
+order += "pomodoro"
 order += "group disks"
 order += "net_rate"
 order += "external_script ip"
@@ -97,17 +97,12 @@ weather_yahoo {
 pomodoro {
   max_breaks = 3
   format = '{mmss}'
+  format_active = '羽 {format}'
+  format_break = '羽 #{breakno} {format}'
+  format_stopped = '{format} ﲊ'
+  format_break_stopped = '{format} #{breakno} ﲊ'
   format_separator = ':'
-  timer_pomodoro = 3000
-}
-
-external_script vagrant {
- script_path = '~/.config/i3/scripts/vagrant_status'
- format = '{output}'
- # on_click 1 = 'exec --no-startup-id py3-cmd refresh vagrant'
- on_click 1 = "exec --no-startup-id 'cd /home/mohammad/projects/ansible-devops && vagrant halt"
- on_click 3 = "exec --no-startup-id 'cd /home/mohammad/projects/ansible-devops && vagrant up"
- cache_timeout = 60
+  timer_pomodoro = 1500
 }
 
 external_script sink_name {
