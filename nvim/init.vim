@@ -41,9 +41,7 @@ Plug 'ap/vim-css-color'                             " display colors in vim
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 't9md/vim-quickhl'
-Plug 'Shougo/deoplete.nvim'
-Plug 'uplus/deoplete-solargraph'
-Plug 'deoplete-plugins/deoplete-go'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'leafgarland/typescript-vim'
 Plug 'stamblerre/gocode'
 Plug 'tpope/vim-rhubarb'
@@ -102,12 +100,18 @@ let g:neomake_info_sign = {
       \ 'texthl': 'NeomakeInfoSign'
       \ }
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('deoplete-options-auto_complete_delay', 1000)
 
-
+" coc
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <space> pumvisible() ? "\<C-y>" : "\<C-g>u\<space>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " " Obsession
 " Load previsou session
