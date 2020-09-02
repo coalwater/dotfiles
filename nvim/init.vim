@@ -60,6 +60,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'yaymukund/vim-rabl'
 Plug 'tomtom/tlib_vim'
+Plug 'dag/vim-fish'
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
@@ -82,7 +83,7 @@ call neomake#configure#automake({
       \ 'InsertLeave': {},
       \ 'BufWritePost': {'delay': 0},
       \ 'BufWinEnter': {},
-      \ }, 200)
+      \ }, 2000)
 let g:neomake_error_sign = {
       \ 'text': '',
       \ 'texthl': 'NeomakeErrorSign'
@@ -103,15 +104,19 @@ let g:neomake_info_sign = {
 
 " coc
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <space> pumvisible() ? "\<C-y>" : "\<C-g>u\<space>"
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr><c-space> coc#refresh()
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y><space>" : "\<C-g>u\<space>"
+else
+  inoremap <expr><space> pumvisible() ? "\<C-y><space>" : "\<C-g>u\<space>"
+end
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-inoremap <silent><expr> <c-space> coc#refresh()
 
 " " Obsession
 " Load previsou session
@@ -247,8 +252,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-map <C-s> :w<cr>                                " ctrl + s for saving
-
 " exit terminal
 tnoremap <S-Esc> <C-\><C-n>
 
@@ -308,28 +311,23 @@ autocmd QuickFixCmdPost *grep* cwindow
 let g:tagbar_show_visibility = 1
 
 command F :let @+=expand("%")
-command GenerateRipperTags :NeomakeSh fish -c "ripper-tags -R --exclude='public' ."
+command GenerateRipperTags :NeomakeSh fish -c "sipper-tags -R --exclude='public' .; and notify-send -u low --app-name 'dipper Tags' 'done'"
 command -range=% StringifyHash <line1>,<line2>s/\(\w\+\):/'\1' =>/g
 command -range=% SymbolizeHash <line1>,<line2>s/'\([^']*\)'\s*=>/\1:\2/g
+command -range=% NewHash <line1>,<line2>s/\:\(\w\+\)\s\+\s*=>\s\+/\1: /g
 map <M-r> :GenerateRipperTags<cr>
 
 
 " ultisnips
-let g:UltiSnipsExpandTrigger="<c-space>"
+let g:UltiSnipsExpandTrigger="<C-S-space>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
 func! Multiple_cursors_before()
-  if deoplete#is_enabled()
-    call deoplete#disable()
-    let g:deoplete_is_enable_before_multi_cursors = 1
-  else
-    let g:deoplete_is_enable_before_multi_cursors = 0
-  endif
+  exe 'CocDisable'
 endfunc
+
 func! Multiple_cursors_after()
-  if g:deoplete_is_enable_before_multi_cursors
-    call deoplete#enable()
-  endif
+  exe 'CocEnable'
 endfunc

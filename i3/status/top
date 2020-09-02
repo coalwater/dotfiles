@@ -1,6 +1,7 @@
 general {
   colors = true
   interval = 2
+  markup = "pango"
 }
 
 order += "external_script kimai"
@@ -11,7 +12,8 @@ order += "battery_level"
 order += 'backlight'
 order += "volume master"
 order += "tztime local"
-order += "static_string name"
+order += 'external_script slack'
+order += 'do_not_disturb'
 
 keyboard_layout {
   on_click 1 = 'exec setxkbmap us'
@@ -93,4 +95,16 @@ static_string background {
   color = '#F38630'
   on_click 1 = 'exec --no-startup-id /home/mohammad/.config/i3/scripts/random_background.sh'
   on_click 3 = 'exec --no-startup-id cp /home/mohammad/Pictures/backgrounds/current.jpg "/home/mohammad/Pictures/backgrounds/$(date +"%Y-%m-%d %H:%M:%S.jpg")"'
+}
+
+do_not_disturb {
+  pause = true
+  thresholds = [(0, "darkgray"), (1, "bad")]
+  format = '[\?color=state [\?if=state |]]'
+}
+external_script slack {
+  format = "{output}"
+  script_path = "~/.config/i3/scripts/slack.sh widget"
+  on_click 1 = 'exec --no-startup-id /home/mohammad/.config/i3/scripts/slack.sh active'
+  on_click 3 = 'exec --no-startup-id /home/mohammad/.config/i3/scripts/slack.sh dnd'
 }

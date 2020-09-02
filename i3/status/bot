@@ -5,12 +5,12 @@ general {
 
 order += "external_script sink_name"
 order += "sysdata"
-order += "pomodoro"
+order += "timer"
 order += "group disks"
 order += "net_rate"
 order += "external_script ip"
 order += "external_script vpn"
-order += "online_status"
+# order += "online_status"
 order += "ethernet eth0"
 order += "wifi"
 
@@ -36,8 +36,8 @@ group disks {
 }
 
 online_status {
-  cache_timeout = 1
-  url = 'http://google.com'
+  cache_timeout = 5
+  url = 'https://api.myip.com'
   format = '{icon}'
   icon_on = ''
   icon_off = ''
@@ -122,4 +122,8 @@ external_script ip {
 external_script gcp {
   script_path = '~/.config/i3/scripts/gcp_status.sh'
   cache_timeout = 60
+}
+
+timer {
+  format = '{timer}'
 }

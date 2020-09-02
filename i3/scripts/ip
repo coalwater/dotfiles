@@ -1,5 +1,5 @@
 #!/bin/sh
-string=`curl -s --connect-timeout 1 -m 2 https://ifconfig.co/json | jq '.ip + ", " + .country_iso' | sed 's/"//g'`
+string=`curl -s --connect-timeout 1 -m 2 https://api.myip.com/ | jq '.ip + ", " + .cc' | sed 's/"//g'`
 
 if [ "$string" == "" ]; then
   string='Disconnected'
