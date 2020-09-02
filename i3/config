@@ -1,3 +1,15 @@
+# Colors
+set $indicator #7c6f64
+set $brown #ebdbb2
+set $grey #504945
+
+# colorclass            border      background  text          indicator
+#client.focused          $grey       $grey       $brown        $indicator
+#client.unfocused        $brown      $brown      $grey         $indicator
+#client.focused_inactive $brown      $brown      $grey         $indicator
+#client.urgent           $indicator  $grey       $indicator    $indicator
+#client.background       $brown
+
 set $mod Mod4
 set $term urxvt
 set $main_output eDP-1
@@ -19,7 +31,7 @@ force_display_urgency_hint 1000 ms
 mouse_warping output
 workspace_auto_back_and_forth yes
 
-# default_border none
+default_border pixel 3
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
@@ -34,6 +46,9 @@ bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
+
+bindsym $mod+Control+$right workspace next_on_output
+bindsym $mod+Control+$Left workspace prev_on_output
 
 bindsym $mod+b split h
 bindsym $mod+v split v
@@ -124,6 +139,7 @@ bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/scripts/volume_mute
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 bindsym XF86Sleep exec --no-startup-id systemctl suspend
 bindsym XF86PowerOff exec --no-startup-id systemctl suspend
@@ -225,3 +241,10 @@ bar {
       urgent_workspace   #cc241d #cc241d #504945
     }
 }
+
+# colorclass            border      background  text          indicator
+client.focused          $brown      $brown      $grey         $indicator
+client.unfocused        $grey       $grey       $brown        $indicator
+client.focused_inactive $grey       $grey       $brown        $indicator
+client.urgent           $indicator  $grey       $indicator    $indicator
+client.background       $brown
