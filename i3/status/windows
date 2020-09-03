@@ -1,0 +1,7 @@
+general {
+  colors = true
+  interval = 2
+  markup = "pango"
+}
+
+order += window

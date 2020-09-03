@@ -25,8 +25,8 @@ backlight {
   button_up = 0
   cache_timeout = 1
   format = ' {level}%'
-  on_click 4 = 'exec --no-startup-id light -A 1'
-  on_click 5 = 'exec --no-startup-id light -U 1'
+  on_click 4 = 'exec --no-startup-id sudo light -A 1'
+  on_click 5 = 'exec --no-startup-id sudo light -U 1'
 }
 
 volume master {

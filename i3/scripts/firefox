@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'json'
+require 'pry-byebug'
+
+def tabs
+  tabs = `bt list`
+  tabs = tabs.split("\n")
+  tabs.map! do |tab|
+    data = tab.split("\t")
+    { id: data[0], title: data[1], url: data[2] }
+  end
+end
+
+def select_tab_from_rofi
+  data = tabs.each_with_object([]) do |tab, object|
+    object << tab[:title]
+    object << tab[:url]
+  end.join("\n")
+  title = `echo "#{data}" | ~/.config/i3/scripts/rofi.sh -dmenu -p firefox`.chomp
+
+  tabs.find do |tab|
+    tab.values_at(:url, :title).include? title
+  end
+end
+
+def activate_tab(tab_id)
+  `bt activate #{tab_id}`
+end
+
+def get_firefox_tabs
+  JSON.parse(`i3-get-windows`).map do |window|
+    name = if window['name'].end_with?('Mozilla Firefox')
+             window['name'].split(' - ', 2).last.sub(' - Mozilla Firefox', '')
+           else
+             window['name']
+           end
+    [name, window['workspace']]
+  end
+end
+
+def switch_to_workspace_with_window_title(title)
+  window_to_switch_to = nil
+  count = 0
+
+  title
+
+  loop do
+    windows = get_firefox_tabs
+    window_to_switch_to = windows.find do |window|
+      window[0] == title
+    end
+
+    break unless window_to_switch_to.nil?
+    break if count >= 10
+
+    count += 1
+    sleep 0.1
+  end
+
+  puts window_to_switch_to.inspect
+
+  `i3-msg workspace '#{window_to_switch_to[1]}'`
+end
+
+tab = select_tab_from_rofi
+
+id = tab[:id]
+activate_tab(id)
+switch_to_workspace_with_window_title(tab[:title])

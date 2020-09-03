@@ -145,8 +145,8 @@ bindsym XF86Sleep exec --no-startup-id systemctl suspend
 bindsym XF86PowerOff exec --no-startup-id systemctl suspend
 
 
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo ~/.config/i3/scripts/backlight.sh down
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo ~/.config/i3/scripts/backlight.sh up
 
 bindsym Mod1+Ctrl+l exec --no-startup-id xautolock -locknow
 
@@ -169,8 +169,12 @@ bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Down move workspace to output down
 
 bindsym $mod+Shift+V exec --no-startup-id $term -e /bin/sh -c 'xsel -b > /tmp/clipboard && nvim /tmp/clipboard && cat /tmp/clipboard | xsel -bi && rm /tmp/clipboard'
+bindsym $mod+Shift+G exec --no-startup-id $term -e /bin/sh -c 'nvim +GhostStart'
+
+bindsym $mod+Shift+T exec --no-startup-id /bin/sh -c 'xsel -op | ~/.config/i3/scripts/tts.sh'
 
 bindsym $mod+o exec --no-startup-id ~/.config/i3/scripts/rofi.sh -show window
+bindsym $mod+Shift+o exec --no-startup-id ~/.config/i3/scripts/firefox
 
 
 bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/focus_on_workspace
@@ -194,7 +198,7 @@ bar {
     position top
     separator_symbol ""
     colors {
-      background #3c3836
+      background #1d2021
       statusline #ebdbb2
       separator  #666666
       focused_workspace  #458588 #458588 #ebdbb2
@@ -209,11 +213,13 @@ bar {
     output $main_output
     status_command py3status -c ~/.config/i3/status/top
     tray_output primary
+    status_command py3status -c ~/.config/i3/status/windows
+    tray_output off
     position top
     separator_symbol ""
     workspace_buttons no
     colors {
-      background #3c3836
+      background #1d2021
       statusline #ebdbb2
       separator  #666666
       focused_workspace  #458588 #458588 #ebdbb2
@@ -223,16 +229,18 @@ bar {
     }
 }
 
+
 bar {
     id bar-bottom
-    output $main_output
+    font pango:FantasqueSansMono Nerd Font 8
+    output primary
     status_command py3status -c ~/.config/i3/status/bot
     tray_output off
     position bottom
     separator_symbol ""
     workspace_buttons no
     colors {
-      background #3c3836
+      background #1d2021
       statusline #ebdbb2
       separator  #666666
       focused_workspace  #458588 #458588 #ebdbb2

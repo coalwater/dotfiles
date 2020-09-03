@@ -37,3 +37,8 @@ abbr squash 'git rebase origin/master -i --autosquash'
 abbr amn 'git commit --amend --no-edit'
 
 alias oneline "xsel -b -o | tr -d '\n' | tr -s ' ' | xsel -b -i"
+
+#aliases
+alias mux tmuxinator
+
+# fundle plugin 'tuvistavie/fish-ssh-agent'

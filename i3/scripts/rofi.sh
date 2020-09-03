@@ -1,2 +1,2 @@
 #!/bin/bash
-rofi -theme gruvbox-dark-hard -dpi 200 -i "$@"
+rofi -theme gruvbox-dark-hard -dpi 270 -i "$@"

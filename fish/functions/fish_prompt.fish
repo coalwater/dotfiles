@@ -30,6 +30,11 @@ function fish_prompt --description 'Write out the prompt'
     set_color red
     echo -n '' (ruby -v | cut -d' ' -f 2)
 
+    # set_color normal
+    # echo -n '|'
+
+    # set_color blue
+    # echo -n '⊛' (kubectl config view --minify --output 'jsonpath={..namespace}')
     set_color normal
 
     __terlar_git_prompt
