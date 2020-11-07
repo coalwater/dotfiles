@@ -2,7 +2,7 @@ function fish_prompt --description 'Write out the prompt'
     set -l last_status $status
 
     # Timestamp
-    set_color $fish_color_timestamp
+    set_color yellow
     echo -n (date "+[%H:%M:%S] ")
 
     # User
@@ -10,14 +10,14 @@ function fish_prompt --description 'Write out the prompt'
     echo -n (whoami)
 
     # @
-    set_color normal
+    set_color yellow
     echo -n '@'
 
     # Host
     set_color $fish_color_host
     echo -n (prompt_hostname)
 
-    set_color normal
+    set_color yellow
     echo -n ':'
 
     # PWD
