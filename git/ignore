@@ -6,3 +6,6 @@ tags
 /doc
 /.yardoc
 Session.vim
+/node_modules
+/tmp
+/public
