@@ -1,0 +1,9 @@
+editor=nvim
+default.project=Inbox
+default.priority=L
+nag=
+calendar.holidays=full
+data.location=
+
+include /usr/local/share/doc/task/rc/holidays.nl-NL.rc
+include /usr/local/share/doc/task/rc/dark-16.theme
