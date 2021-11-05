@@ -62,6 +62,7 @@ Plug 'yaymukund/vim-rabl'
 Plug 'tomtom/tlib_vim'
 Plug 'dag/vim-fish'
 Plug 'ryanoasis/vim-devicons'
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -319,6 +320,7 @@ map <M-r> :GenerateRipperTags<cr>
 
 
 " ultisnips
+let g:snipMate = { 'snippet_version' : 1 }
 let g:UltiSnipsExpandTrigger="<C-S-space>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
