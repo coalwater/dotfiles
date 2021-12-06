@@ -259,6 +259,7 @@ tnoremap <S-Esc> <C-\><C-n>
 " Ag search
 nmap  <silent><leader>e :call fzf#vim#ag(expand('<cword>'))<CR>
 nmap  <silent><leader>E :call fzf#vim#ag(expand('<cWORD>'))<CR>
+nmap <silent><M-]> :call fzf#vim#tags(expand('<cword>') . " ", fzf#vim#with_preview({ "placeholder": "--tag {2}:{-1}:{3..}" }))<CR>
 
 command! Agword call fzf#vim#ag('<cword>')
 
