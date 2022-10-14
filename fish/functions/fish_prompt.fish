@@ -30,8 +30,17 @@ function fish_prompt --description 'Write out the prompt'
     set_color red
     echo -n '' (ruby -v | cut -d' ' -f 2)
 
-    # set_color normal
-    # echo -n '|'
+    if test -f Gemfile
+      set_color normal
+      bundle check 2> /dev/null > /dev/null
+      if test $status -ne 0
+        echo -n '|'
+        set_color red
+        echo -n 'Run bundle install'
+      end
+      set_color normal
+    end
+
 
     # set_color blue
     # echo -n '⊛' (kubectl config view --minify --output 'jsonpath={..namespace}')
