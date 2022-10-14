@@ -2,7 +2,10 @@
 " possible, as it has side effects.
 set hidden
 set backup
-set backupdir=$HOME/.vim/backups,.
+set undofile                                       "  Save undo's after file closes
+set backupdir=$HOME/.local/nvim/backups,.
+set undodir=$HOME/.local/nvim/undo,.              "  where to save undo histories
+set directory=$HOME/.local/nvim/swap,.
 set background=dark
 set showtabline=0
 set wildmenu
@@ -62,7 +65,9 @@ Plug 'yaymukund/vim-rabl'
 Plug 'tomtom/tlib_vim'
 Plug 'dag/vim-fish'
 Plug 'ryanoasis/vim-devicons'
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'neovim/nvim-lspconfig'
 
 call plug#end()
 
@@ -90,7 +95,7 @@ let g:neomake_error_sign = {
       \ 'texthl': 'NeomakeErrorSign'
       \ }
 let g:neomake_warning_sign = {
-      \ 'text': '',
+      \ 'text': '⚠',
       \ 'texthl': 'NeomakeWarningSign',
       \ }
 let g:neomake_message_sign = {
@@ -98,7 +103,7 @@ let g:neomake_message_sign = {
       \ 'texthl': 'NeomakeMessageSign',
       \ }
 let g:neomake_info_sign = {
-      \ 'text': '',
+      \ 'text': '>>',
       \ 'texthl': 'NeomakeInfoSign'
       \ }
 
@@ -106,12 +111,10 @@ let g:neomake_info_sign = {
 " coc
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr><c-space> coc#refresh()
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y><space>" : "\<C-g>u\<space>"
-else
-  inoremap <expr><space> pumvisible() ? "\<C-y><space>" : "\<C-g>u\<space>"
-end
+" inoremap <expr><Enter> pumvisible() ? <Plug>(coc-snippets-expand) : "\<S-Tab>"
+inoremap <expr><c-space> pumvisible() ? "\<C-y>" : "\<space>"
+inoremap <expr><space> pumvisible() ? "\<C-y>\<space>" : "\<space>"
+nnoremap <leader>a :CocAction<cr>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -211,13 +214,13 @@ command W w
 command Q q
 
 " Git gutter goodies
-nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>          " Leader + Right shows hunk
-nnoremap <M-j> :GitGutterNextHunk<CR>                    " Alt + Down shows next hunk
-nnoremap <M-k> :GitGutterPrevHunk<CR>                      " Alt + Up shows previous hunk
-nnoremap <Leader><Leader><Left> :GitGutterUndoHunk<CR>    " Leader + Leader + left reverts hunk
+nnoremap <Leader><Right> :GitGutterPreviewHunk<CR>
+nnoremap <M-j> :GitGutterNextHunk<CR>
+nnoremap <M-k> :GitGutterPrevHunk<CR>
+nnoremap <Leader><Leader><Left> :GitGutterUndoHunk<CR>
 
-nnoremap <M-J> :NeomakeNextLoclist<CR> " jump to next error
-nnoremap <M-K> :NeomakePrevLoclist<CR> " jump to previous error
+nnoremap <M-J> :NeomakeNextLoclist<CR>
+nnoremap <M-K> :NeomakePrevLoclist<CR>
 
 " alt + direction for buffer swapping
 noremap <M-h> :bp<cr>
@@ -234,9 +237,6 @@ let g:mundo_close_on_revert = 1
 let g:mundo_width = 30
 let g:mundo_preview_height = 40
 
-set undofile                                       "  Save undo's after file closes
-set undodir=$HOME/.local/nvim/undo,.              "  where to save undo histories
-set directory=$HOME/.local/nvim/swap,.
 set undolevels=1000                                "  How many undos
 set undoreload=10000                               "  number of lines to save for undo
 
@@ -257,7 +257,7 @@ map <C-l> <C-W>l
 tnoremap <S-Esc> <C-\><C-n>
 
 " Ag search
-nmap  <silent><leader>e :call fzf#vim#ag(expand('<cword>'))<CR>
+nmap  <silent><leader>e :call fzf#vim#ag(expand('<cword>'), fzf#vim#with_preview())<CR>
 nmap  <silent><leader>E :call fzf#vim#ag(expand('<cWORD>'))<CR>
 nmap <silent><M-]> :call fzf#vim#tags(expand('<cword>') . " ", fzf#vim#with_preview({ "placeholder": "--tag {2}:{-1}:{3..}" }))<CR>
 
@@ -300,7 +300,7 @@ vmap <Leader>m <Plug>(quickhl-manual-this)
 nmap <Leader>M <Plug>(quickhl-manual-reset)
 
 nnoremap <M-F> gg=G``
-set colorcolumn=81,121
+set colorcolumn=81
 
 vmap <Leader>st :call I18nTranslateString()<CR>
 vmap <Leader>gt :call I18nDisplayTranslation()<CR>
@@ -313,7 +313,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 let g:tagbar_show_visibility = 1
 
 command F :let @+=expand("%")
-command GenerateRipperTags :NeomakeSh fish -c "sipper-tags -R --exclude='public' .; and notify-send -u low --app-name 'dipper Tags' 'done'"
+command GenerateRipperTags :NeomakeSh fish -c "ripper-tags -R --exclude='public' .; and notify-send -u low --app-name 'dipper Tags' 'done'"
 command -range=% StringifyHash <line1>,<line2>s/\(\w\+\):/'\1' =>/g
 command -range=% SymbolizeHash <line1>,<line2>s/'\([^']*\)'\s*=>/\1:\2/g
 command -range=% NewHash <line1>,<line2>s/\:\(\w\+\)\s\+\s*=>\s\+/\1: /g
