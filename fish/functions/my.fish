@@ -28,12 +28,12 @@ end
 abbr checkout 'git checkout'
 abbr commit 'git commit'
 abbr add 'git add'
-abbr rebase 'git rebase origin/master -i'
+abbr rebase 'git rebase -i origin/main'
 abbr fetch 'git fetch -p'
 abbr ff 'git merge --ff-only'
 abbr pf 'git push origin HEAD --force-with-lease'
 abbr fixup 'git commit --fixup'
-abbr squash 'git rebase origin/master -i --autosquash'
+abbr squash 'git rebase -i --autosquash origin/main'
 abbr amn 'git commit --amend --no-edit'
 
 alias oneline "xsel -b -o | tr -d '\n' | tr -s ' ' | xsel -b -i"
