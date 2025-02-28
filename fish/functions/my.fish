@@ -25,20 +25,11 @@ end
 
 #Abbreviations
 
-abbr checkout 'git checkout'
-abbr commit 'git commit'
-abbr add 'git add'
-abbr rebase 'git rebase -i origin/main'
-abbr fetch 'git fetch -p'
-abbr ff 'git merge --ff-only'
-abbr pf 'git push origin HEAD --force-with-lease'
-abbr fixup 'git commit --fixup'
-abbr squash 'git rebase -i --autosquash origin/main'
-abbr amn 'git commit --amend --no-edit'
-
 alias oneline "xsel -b -o | tr -d '\n' | tr -s ' ' | xsel -b -i"
 
 #aliases
 alias mux tmuxinator
 
-# fundle plugin 'tuvistavie/fish-ssh-agent'
+function kcontext
+  kubectl config use-context (kubectl config get-contexts -o name | fzf)
+end

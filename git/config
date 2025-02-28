@@ -1,6 +1,7 @@
 [user]
   name = Mohammad AbuShady
   email = mohammad@abushady.com
+  signingkey = 92E45FC319DAC0A5D0DAC4F46399DAB93B30DE19
 [merge]
   tool = meld
 [diff]
@@ -8,6 +9,8 @@
 [core]
   excludesfile = ~/.config/git/ignore
   editor = nvim
+	untrackedcache = true
+	fsmonitor = true
 [push]
   default = simple
 [rerere]
@@ -18,8 +21,11 @@
   autocorrect = -1
 [log]
   decorate = auto
+	date = iso
+	showSignature = true
 [commit]
   verbose = true
+  gpgsign = false
 [rebase]
   autostash = true
   autosquash = false
@@ -30,3 +36,7 @@
   rebase = true
 [advice]
   detachedHead = false
+[init]
+  defaultBranch = main
+[fetch]
+	writeCommitGraph = true
