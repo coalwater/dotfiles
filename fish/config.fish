@@ -68,39 +68,29 @@ function fish_greeting
 end
 
 function kexec
-  if test "$argv[1]" = "-i"
-    # Select context first
-    set context (kubectl config get-contexts -o name | fzf --prompt="Select context: ")
-    if test -z "$context"
-      echo "Context selection cancelled"
-      return 1
-    end
-    kubectl config use-context $context
-    
-    # Select namespace
-    set namespace (kubectl get namespaces -o name | sed 's/namespace\///' | fzf --prompt="Select namespace: ")
-    if test -z "$namespace"
-      echo "Namespace selection cancelled"
-      return 1
-    end
-    kubectl config set-context --current --namespace=$namespace
-    
-    # Now proceed with pod selection with state and age information
-    set pod_name (kubectl get pods --no-headers | fzf --prompt="Select pod: " | awk '{print $1}')
-    if test -z "$pod_name"
-      echo "Pod selection cancelled"
-      return 1
-    end
-    kubectl exec -it (kubectl get -o yaml pod/$pod_name | yq '.metadata.name') -- bin/rails c
-  else
-    # Original behavior but enhanced with state and age information
-    set pod_name (kubectl get pods --no-headers | fzf | awk '{print $1}')
-    if test -z "$pod_name"
-      echo "Pod selection cancelled"
-      return 1
-    end
-    kubectl exec -it (kubectl get -o yaml pod/$pod_name | yq '.metadata.name') -- bin/rails c
+  # Select context first
+  set context (kubectl config get-contexts -o name | fzf --prompt="Select context: ")
+  if test -z "$context"
+    echo "Context selection cancelled"
+    return 1
   end
+  kubectl config use-context $context
+  
+  # Select namespace
+  set namespace (kubectl get namespaces -o name | sed 's/namespace\///' | fzf --prompt="Select namespace: ")
+  if test -z "$namespace"
+    echo "Namespace selection cancelled"
+    return 1
+  end
+  kubectl config set-context --current --namespace=$namespace
+  
+  # Now proceed with pod selection with state and age information
+  set pod_name (kubectl get pods --no-headers | fzf --prompt="Select pod: " | awk '{print $1}')
+  if test -z "$pod_name"
+    echo "Pod selection cancelled"
+    return 1
+  end
+  kubectl exec -it (kubectl get -o yaml pod/$pod_name | yq '.metadata.name') -- bin/rails c
 end
 
 function fixcli
