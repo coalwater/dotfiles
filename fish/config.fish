@@ -68,7 +68,21 @@ function fish_greeting
 end
 
 function kexec
-  kubectl exec -it (kubectl get -o yaml (kubectl get pods -o name | fzf) | yq '.metadata.name') -- bin/rails c
+  if test "$argv[1]" = "-i"
+    # Select context first
+    set context (kubectl config get-contexts -o name | fzf --prompt="Select context: ")
+    kubectl config use-context $context
+    
+    # Select namespace
+    set namespace (kubectl get namespaces -o name | sed 's/namespace\///' | fzf --prompt="Select namespace: ")
+    kubectl config set-context --current --namespace=$namespace
+    
+    # Now proceed with pod selection
+    kubectl exec -it (kubectl get -o yaml (kubectl get pods -o name | fzf --prompt="Select pod: ") | yq '.metadata.name') -- bin/rails c
+  else
+    # Original behavior
+    kubectl exec -it (kubectl get -o yaml (kubectl get pods -o name | fzf) | yq '.metadata.name') -- bin/rails c
+  end
 end
 
 function fixcli
