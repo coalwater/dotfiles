@@ -78,11 +78,11 @@ function kexec
     kubectl config set-context --current --namespace=$namespace
     
     # Now proceed with pod selection with state and age information
-    set pod_name (kubectl get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,AGE:.metadata.creationTimestamp" | tail -n +2 | fzf --prompt="Select pod: " | awk '{print $1}')
+    set pod_name (kubectl get pods --no-headers | fzf --prompt="Select pod: " | awk '{print $1}')
     kubectl exec -it (kubectl get -o yaml pod/$pod_name | yq '.metadata.name') -- bin/rails c
   else
     # Original behavior but enhanced with state and age information
-    set pod_name (kubectl get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,AGE:.metadata.creationTimestamp" | tail -n +2 | fzf | awk '{print $1}')
+    set pod_name (kubectl get pods --no-headers | fzf | awk '{print $1}')
     kubectl exec -it (kubectl get -o yaml pod/$pod_name | yq '.metadata.name') -- bin/rails c
   end
 end
