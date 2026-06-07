@@ -1,7 +1,0 @@
-#!/bin/bash
-selected_mark=`echo -n '' | ~/.config/i3/scripts/rofi.sh -dmenu`
-if [ "$selected_mark" == '' ]; then
-  exit
-else
-  `i3-msg mark \""$selected_mark"\" > /dev/null`
-fi

@@ -1,7 +1,0 @@
-#!/bin/bash
-selected_workspace=`~/.config/i3/scripts/get_workspace_from_rofi.sh "Move to workspace"`
-if [ "$selected_workspace" == '' ]; then
-  exit
-else
-  i3-msg move window to workspace \""$prefix$selected_workspace"\" > /dev/null
-fi

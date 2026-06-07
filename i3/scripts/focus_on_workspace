@@ -1,7 +1,0 @@
-#!/bin/bash
-selected_workspace=`~/.config/i3/scripts/get_workspace_from_rofi.sh "Focus on workspace"`
-if [ "$selected_workspace" == '' ]; then
-  exit
-else
-  i3-msg workspace \""$selected_workspace"\" > /dev/null
-fi

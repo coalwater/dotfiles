@@ -1,9 +1,0 @@
-#!/bin/sh
-vboxmanage list runningvms | grep cw-dev > /dev/null
-if [[ "$?" == 1 ]]; then
-  echo "VBox: Off"
-  echo '#00FF00'
-else
-  echo "VBox: Running"
-  echo '#FF0000'
-fi
