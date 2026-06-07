@@ -7,6 +7,8 @@ set background=dark
 set showtabline=0
 set wildmenu
 set wildmode=longest:full,full
+set autoread
+
 
 " set rnu
 set cole=0
@@ -15,7 +17,7 @@ let g:vim_json_syntax_conceal = 0
 set lbr
 set mouse=a
 
-set shell=/usr/bin/fish                               " To avoid fish
+set shell=/opt/homebrew/bin/fish
 let mapleader = " "                                   " Use space as Leader
 let g:loaded_perl_provider = 0
 
@@ -27,6 +29,7 @@ Plug 'junegunn/vim-plug'
 Plug 'terryma/vim-multiple-cursors'                 " multiple cursor functionality, like sublime
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'ibhagwan/fzf-lua'
 Plug 'tpope/vim-rails'                              " rails navigation and functions
 Plug 'scrooloose/nerdtree'                          " a file tree
 Plug 'bling/vim-airline'                            " the nice status line below
@@ -45,35 +48,21 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 't9md/vim-quickhl'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'leafgarland/typescript-vim'
-Plug 'stamblerre/gocode'
 Plug 'tpope/vim-rhubarb'
 Plug 'neomake/neomake'
 Plug 'morhetz/gruvbox'                              " color scheme
 Plug 'majutsushi/tagbar'
-Plug 'marcweber/vim-addon-mw-utils'
-Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-rails'
 Plug 'mhinz/vim-startify'
-Plug 'slim-template/vim-slim'
-Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 Plug 'honza/vim-snippets'
-Plug 'yaymukund/vim-rabl'
-Plug 'tomtom/tlib_vim'
-Plug 'dag/vim-fish'
 Plug 'ryanoasis/vim-devicons'
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'hashivim/vim-terraform'
-Plug 'mrded/vim-github-codeowners'
-Plug 'romgrk/barbar.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
-Plug 'github/copilot.vim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'epwalsh/obsidian.nvim'
+Plug 'williamboman/mason.nvim'
+Plug 'neovim/nvim-lspconfig'
 
 call plug#end()
 
@@ -125,7 +114,7 @@ let g:neomake_info_sign = {
 
 
 " coc
-let g:coc_node_path = '/opt/homebrew/bin/node'
+let g:coc_node_path = '/opt/homebrew/opt/node@20/bin/node'
 inoremap <expr><TAB>  pumvisible() ? coc#pum#next(1) : "\<TAB>"
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr><c-space> pumvisible() ? "\<C-y>" : "\<space>"
@@ -219,7 +208,7 @@ vnoremap <silent> j gj
 vnoremap <silent> k gk
 
 " space + w closes buffer
-nnoremap <leader>w :BufferClose<CR>
+nnoremap <leader>w :bd<CR>
 " space + q closes all buffers
 nnoremap <leader>q :%bd<CR>
 " space + space + q closes all
@@ -260,10 +249,8 @@ nnoremap <M-J> :NeomakeNextLoclist<CR>
 nnoremap <M-K> :NeomakePrevLoclist<CR>
 
 " alt + direction for buffer swapping
-noremap <M-h> :BufferPrevious<cr>
-noremap <M-l> :BufferNext<cr>
-noremap <M-Left> :BufferMovePrevious<cr>
-noremap <M-Right> :BufferMoveNext<cr>
+noremap <M-h> :bp<cr>
+noremap <M-l> :bn<cr>
 
 
 " Easy motion search to replace the default
@@ -363,18 +350,6 @@ command -range=% NewHash <line1>,<line2>s/\:\(\w\+\)\s\+\s*=>\s\+/\1: /g
 map <M-r> :GenerateRipperTags<cr>
 
 
-" copilot
-let g:copilot_no_tab_map = v:true
-let g:copilot_assume_mapped = v:true
-let g:copilot_tab_fallback = ""
-imap <silent><script><expr> <M-Enter> copilot#Accept("\<CR>")
-
-
-nnoremap <F9> :CopilotChatToggle<CR>
-autocmd BufRead COMMIT_EDITMSG :CopilotChatCommit
-
-"
-
 func! Multiple_cursors_before()
   exe 'CocDisable'
 endfunc
@@ -384,83 +359,65 @@ func! Multiple_cursors_after()
 endfunc
 
 lua << EOF
-require("CopilotChat").setup {
-  system_prompt = [[
-  You are a dynamic technical assistant that adapts its expertise based on the current context (code, documentation, architecture, debugging, etc.).
+local function qf_execute_command(cmd)
+  -- Get quickfix list
+  local qf_list = vim.fn.getqflist()
 
-  • Main Communication approach:
-   - Start with high-level overview (architecture, patterns, key components)
-   - Include key trade-offs, risks, and alternatives with their implications
-   - Avoid implementation details in initial response
-   - Focus on relationships and system-level concepts first
-   - Note important details that can be expanded upon request
-   - Conclude with relevant professional opinions and concerns based on experience
+  -- Extract unique filenames from quickfix entries
+  local files = {}
+  local seen = {}
+  for _, item in ipairs(qf_list) do
+    local fname = vim.fn.bufname(item.bufnr)
+    if fname and fname ~= "" and not seen[fname] then
+      table.insert(files, vim.fn.shellescape(fname))
+      seen[fname] = true
+    end
+  end
 
-  • When clarification is needed:
-   - First compile a complete list of necessary questions
-   - Present them in order of priority/dependency
-   - Ask one question at a time, waiting for response
-   - Track answered questions and maintain context through the conversation
+  -- If no files found, notify and return
+  if #files == 0 then
+    vim.notify("No files in quickfix list", vim.log.levels.WARN)
+    return
+  end
 
-  • When in debugging context:
-   - First identify the error type (syntax, runtime, configuration, integration)
-   - Suggest minimal reproduction steps
-   - Propose incremental verification steps
-   - Recommend logging/diagnostic approaches when relevant
-  ]],
-  debug = false,
-  show_help = "yes",
-  model = "claude-3.5-sonnet",
-  temperature = 0.1,
-  chat_autocomplete = false,
-  build = function()
-    vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
-  end,
-  event = 'VeryLazy',
-  context = 'buffers',
-  history_path = vim.fn.stdpath('data') .. '/copilotchat_history',
-  save_history = true,
-  prompts = {} -- Remove all the separate mode prompts
-}
+  -- Construct the command
+  local full_cmd = cmd .. " " .. table.concat(files, " ")
 
-require("obsidian").setup {
-  workspaces = {
-    {
-      name = "personal",
-      path = "~/Sync/Obsidian",
-    },
+  -- Open a new terminal window at the bottom
+  vim.cmd('botright 15split')
+  vim.cmd('terminal')
+
+  -- Get the terminal buffer number
+  local term_buf = vim.api.nvim_get_current_buf()
+
+  -- Send the command to the terminal
+  vim.api.nvim_chan_send(vim.b[term_buf].terminal_job_id, full_cmd .. "\n")
+
+  -- Optionally focus on the terminal window
+  -- vim.cmd('wincmd p') -- Remove this line if you want to stay in terminal
+
+  return full_cmd
+end
+
+-- Create Vim command wrapper
+vim.api.nvim_create_user_command('QfExec', function(opts)
+  qf_execute_command(opts.args)
+end, {
+  nargs = '+',
+  desc = 'Execute command with quickfix files'
+})
+
+require('nvim-treesitter.configs').setup({
+  ensure_installed = {"lua", "vim", "vimdoc", "markdown", "markdown_inline", "ruby", "javascript", "typescript", "tsx", "html", "css", "json", "yaml", "bash", "fish"},
+  sync_install = false,
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false
   }
-}
+})
+
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.ruby_lsp.setup{}
+
 EOF
-
-nnoremap <leader>ff :CopilotChatFiles<CR>
-nnoremap <leader>cc :CopilotChatReset<CR>
-command! CopilotChatFiles
-    \ call fzf#run(fzf#wrap({
-    \ 'source': 'git ls-files',
-    \ 'sink*': {lines -> [
-    \   setreg('"', join(map(lines, '"#file:" . v:val'), "\n")),
-    \   execute('CopilotChatToggle'),
-    \   execute('normal! pO')
-    \ ]},
-    \ 'options': ['--multi'],
-    \ }))
-
-nnoremap <leader>fd :CopilotChatDirs<CR>
-command! CopilotChatDirs
-    \ call fzf#run(fzf#wrap({
-    \ 'source': 'find . -type d -not -path "*/\.*"',
-    \ 'sink': function('s:HandleDirSelection'),
-    \ }))
-
-function! s:HandleDirSelection(dir) abort
-    call fzf#run(fzf#wrap({
-    \ 'source': printf('find %s -type f -not -path "*/\.*"', shellescape(a:dir)),
-    \ 'sink*': {lines -> [
-    \   setreg('"', join(map(lines, '"#file:" . v:val'), "\n")),
-    \   execute('CopilotChatToggle'),
-    \   execute('normal! pO')
-    \ ]},
-    \ 'options': ['--multi'],
-    \ }))
-endfunction
